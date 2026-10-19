@@ -32,3 +32,5 @@ ENV APP_ENV=production \
 
 # Render provides the PORT variable
 CMD sh -c "php artisan serve --host=0.0.0.0 --port=${PORT:-8080}"
+
+RUN cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
