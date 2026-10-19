@@ -1,0 +1,254 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+}
+
+/* ===== TEXT COLORS ===== */
+.my-black { color: #E2E8F0 !important; }
+.my-dark  { color: #CBD5E1 !important; }
+.my-grey  { color: #94A3B8 !important; }
+
+/* ===== PREFLIGHT FIXES =====
+   Tailwind strips heading sizes and list bullets — restore them
+   where we actually want them. */
+.sections h2 {
+    color: #38BDF8 !important;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.sections ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+/* ===== LINKS ===== */
+a { color: #38BDF8; }
+a:hover { color: #14B8A6; }
+
+/* ===== PAGE FRAME ===== */
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #0B1220;
+}
+/* ===== HEADER: blue-to-teal fade ===== */
+header {
+    flex-shrink: 0;
+    height: 100px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #1D4ED8, #0EA5E9, #14B8A6);
+    border-bottom: 2px solid #14B8A6;
+}
+
+.profile{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    width: 75%;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 6px solid #1E3A5F;
+    border-radius: 10px;
+    background-color: rgba(11, 18, 32, 0.35);
+    color: #FFFFFF;
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid #14B8A6;
+    border-radius: 50%;
+}
+
+.secondary-menu{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+/* ===== MAIN (the only scrolling area) ===== */
+main {
+    flex: 1;                     /* take all space between header & footer */
+    overflow-y: auto;            /* scroll here, not on body */
+    background-color: #0B1220;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== ASIDE: projects strip, 75% wide, aligned left ===== */
+aside {
+    width: 40%;
+    margin: 30px;
+    padding: 10px;
+    background-color: #111B2E;
+    border: 5px solid #1E3A5F;
+    border-radius: 10px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;             /* thumbnails wrap on small widths */
+    justify-content: center;
+    gap: 10px;
+}
+
+.project img {
+    max-width: 130px;
+    border: 5px solid #14B8A6;
+    border-radius: 8px;
+}
+
+/* ===== DROPDOWN ===== */
+#dropdown-content {
+    width: auto;
+    max-width: 500px;
+    background-color: #111B2E;
+    border: 5px solid #1E3A5F;
+    border-radius: 10px;
+}
+
+/* ===== DETAILED INFO: education / work / skills / certs ===== */
+.detailed-info {
+    margin: 30px;
+    padding: 10px;
+    background-color: #0F1A2B;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.my-icons{
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.my-certifications{
+    width: 400px;
+    height: 400px;
+    object-fit : contain;
+}
+
+.sections {
+    padding: 30px;
+    background-color: #162236;   /* so you can see each block */
+    border-radius: 8px;
+    border: 5px solid #1E3A5F;
+
+    /* --- text containment --- */
+    min-width: 0;                  /* let flexbox shrink me below my content size */
+    max-width: 100%;               /* never grow past my parent */
+    overflow-wrap: break-word;     /* break long words/URLs instead of overflowing */
+}
+
+/* ===== FOOTER ===== */
+footer {
+    flex-shrink: 0;
+    height: 120px;
+    background: linear-gradient(90deg, #1D4ED8, #0EA5E9, #14B8A6);
+    border-top: 2px solid #14B8A6;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    main {
+        overflow-y: visible;
+    }
+
+    .profile img {
+        width: 65px;
+        height: 65px;
+    }
+    aside {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .detailed-info {
+        margin: 10px 0;
+    }
+    .dropdown-content{
+        width: 300px !important;/* override Materialize's auto width */
+    }
+
+}
+@media (min-width: 768px) {
+
+
+}
+
+.cv-page .detailed-info {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 2px;
+    width: 100%;
+    padding: 2px;
+}
+.cv-page .cv-left {
+    padding: 2px;
+    background-color: #111B2E;
+    border: 2px solid #1E3A5F;
+    border-radius: 10px;
+}
+
+.cv-page .cv-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cv-page .sections {
+    background-color: #111B2E;
+    border: 2px solid #1E3A5F;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+.cv-page .sections h5 {
+    color: #38BDF8;
+    border-bottom: 2px solid #14B8A6;
+}
+
+
+@media print {
+    header,
+    footer,
+    aside {
+        display: none !important;
+    }
+
+    main {
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow: visible;
+    }
+    .sections {
+    break-inside: avoid;
+}
+}
