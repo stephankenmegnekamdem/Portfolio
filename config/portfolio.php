@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name'  => 'KENMEGNE KAMDEM STEPHAN',
+    'name'  => 'STEPHAN KENMEGNE KAMDEM',
     'email' => 'kenmgnekamdemstephan@gmail.com',
 
     'projects' => [
@@ -40,7 +40,7 @@ return [
         'personal' =>[
             'title' => 'STEPHAN KENMEGNE KAMDEM',
             'icon' => 'assets/images/projects/personal/icon.png',
-            'items' => ['Software Engineer student'],
+            'items' => ["Software Engineer student"],
             'descriptions' => ["Final-year Bachelor's Software Engineering student with 3.75/4 GPA selected",
                               "for an Erasmus+ Internship Mobility and currently undertaking an Erasmus+",
                               "Study Mobility at EPITECH Paris. Passionate about programming and software",
@@ -91,7 +91,7 @@ return [
             ],
 
             [
-                'title' => 'MAARIF COLLEGE Ngaoundere',
+                'title' => "MAARIF COLLEGE Ngaoundere\n",
                 'icon'  => 'images/icons/education.svg',
                 'items' => ['GCE Advanced Level — High School X (2020–2022)'],
                 'descriptions' => ['Took Computer Science, Pure Maths with Mechanics, Physics, Biology, Chemistry.',

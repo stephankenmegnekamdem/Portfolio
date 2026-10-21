@@ -13,13 +13,26 @@
 </head>
 <body>
 
-    <x-header />
+    <main class="snap-container">
 
-    <main>
+        <section class="screen screen-header">
+            <x-header />
+            <div class="screen-body">
+                <!-- intro info goes here -->
+                @yield('intro')
+            </div>
+        </section>
+
         @yield('content')
-    </main>
 
-    <x-footer />
+        <section class="screen screen-footer">
+            <div class="screen-body">
+                @yield('outro')
+            </div>
+            <x-footer />
+        </section>
+
+    </main>
 
     @stack('scripts')
 </body>

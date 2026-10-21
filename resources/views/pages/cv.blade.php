@@ -1,31 +1,20 @@
-
-@extends('components.layouts.app')
+@extends('components.layouts.cvapp')
 
 @section('title', 'CV — ' . config('portfolio.name'))
 
 @section('content')
-
 <div class="cv-page">
     <!-- Sidebar: photo, menu, personal details -->
     <aside>
-        <div class="relative">
-            <button type="button" id="dropdown-trigger" aria-label="Open menu">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </button>
 
-            <ul id="dropdown-content">
-                <li><a href="#about-me">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-            </ul>
-        </div>
+
+                <a href="#about-me">About</a>
+                <a href="#education">Education</a>
+                <a href="#work">Work</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#certifications">Certifications</a>
+
 
 
     </aside>
@@ -35,16 +24,16 @@
 <!-- LEFT COLUMN: profile, about, contact, languages -->
         <div class="cv-left">
 
-            <div class="profile">
+            <div class="profile items-center">
                 <img src="assets/images/PHOTO-2026-09-28-17-15-02.jpg" alt="Photo of Stephan Kenmegne Kamdem">
             </div>
+            <br>
 
             <h6 class="my-black"><b>KENMEGNE KAMDEM STEPHAN</b></h6>
-            <p><b>Nationality:</b> Cameroonian 🇨🇲</p>
-            <p><b>Gender:</b> Male</p>
+           <br>
 
-            <div class="sections" id="about-me">
-                <h5 class="my-black">ABOUT ME</h5>
+
+                <h5 id="about-me">ABOUT ME</h5>
                 <p>
                     Final-year Bachelor's Software Engineering student with 3.75/4 GPA selected
                     for an Erasmus+ Internship Mobility and currently undertaking an Erasmus+
@@ -53,13 +42,13 @@
                     developing clean, efficient, and practical solutions. Eager to continuously
                     learn new technologies, strengthen technical skills through hands-on
                     experience, and build an international career in software engineering.
-                </p>
-            </div>
+                </p><br>
 
-            <h6 class="my-black"><b>Contact</b></h6>
+
+            <h5><b>Contact</b></h5><br>
             <p>
                 <a href="https://www.google.com/maps/search/?api=1&query=8+esplanade+de+Chantilly%2C+93330+Neuilly-sur-Marne%2C+France">
-                    <i class="material-icons">place</i> 8 esplanade de Chantilly, 93330, Neuilly-sur-Marne, France
+                    <i class="material-icons">place</i> 93330, Neuilly-sur-Marne, France
                 </a>
             </p>
             <p>
@@ -67,16 +56,7 @@
                     <i class="material-icons">email</i> kenmgnekamdemstephan@gmail.com
                 </a>
             </p>
-            <p>
-                <a href="tel:+33781185306">
-                    <i class="material-icons">phone</i> +33 7 81 18 53 06
-                </a>
-            </p>
-            <p>
-                <a href="https://wa.me/905010322630">
-                    <i class="fa-brands fa-whatsapp"></i> +90 501 032 26 30
-                </a>
-            </p>
+
             <p>
                 <a href="https://github.com/stephankenmegnekamdem">
                     <i class="fa-brands fa-github"></i> GitHub
@@ -88,7 +68,9 @@
                 </a>
             </p>
 
-            <h6 class="my-black"><b>Languages</b></h6>
+            <br>
+
+            <h5><b>Languages</b></h5><br>
             <p>English: Mother tongue</p>
             <p>French: Mother tongue</p>
             <p>Turkish: B2 level</p>
@@ -98,7 +80,7 @@
         <div class="cv-right">
 
         <div class="sections" id="education">
-            <h5 class="my-black">EDUCATION & TRAINING</h5>
+            <h5>EDUCATION & TRAINING</h5>
 
             <div id="epitech">
                 <h6 class="my-grey">14/09/2026 - CURRENT · Paris, France</h6>
@@ -172,7 +154,7 @@
         </div>
 
         <div class="sections" id="work">
-            <h5 class="my-black">WORK EXPERIENCE</h5>
+            <h5>WORK EXPERIENCE</h5>
             <div id="donbosco">
                 <h6 class="my-black">
                     <img class="my-icons" src="assets/images/unnamed.png">
@@ -191,7 +173,7 @@
         </div>
 
         <div class="sections" id="skills">
-            <h5 class="my-black">SKILLS</h5>
+            <h5>SKILLS</h5>
             <div id="skills1">
                 <h6 class="my-grey">DIGITAL SKILLS</h6>
                 <p>HTML/CSS/JavaScript · Java programming · Microsoft Office · Machine Learning · Python programming · PHP / Laravel Framework · GitHub basics</p>
@@ -201,7 +183,7 @@
         </div>
 
         <div class="sections" id="projects">
-            <h5 class="my-black">PROJECTS</h5>
+            <h5>PROJECTS</h5>
 
 
                 <div class="project" id="project1">
@@ -246,7 +228,7 @@
         </div>
 
         <div class="sections" id="certifications">
-            <h5 class="my-black">CERTIFICATIONS</h5>
+            <h5>CERTIFICATIONS</h5>
 
             <div>
                 <h6 class="my-grey">Istanbul Nisantasi University, 12/08/2025</h6>
@@ -280,4 +262,5 @@
         </div>
     </div>
 </div>
+
 @endsection

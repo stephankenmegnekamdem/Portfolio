@@ -1,7 +1,8 @@
 @extends("components.layouts.app")
 @section('title', 'Projects — ' . config('portfolio.name'))
 @section('content')
-
+<section class="screen">
+        <div class="screen-body">
     <aside>
              @foreach($projects as $project)
             <a href="#!">{{ $project['title'] }}</a><br>
@@ -12,4 +13,6 @@
                 <x-project-card :project="$project" />
             @endforeach
     </div>
+        </div>
+</section>
 @endsection

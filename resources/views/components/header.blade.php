@@ -1,11 +1,6 @@
 <header>
-    <div class="profile">
-            <img src="{{ asset('assets/images/PHOTO-2026-09-28-17-15-02.jpg') }}" alt="{{ config('portfolio.name') }}">
-            <div class="page-title">
-                <h1 class="my-black">My Portfolio</h1>
-            </div>
-    </div>
-    <div class="secondary-menu">
+
+
     <a href="{{ route('home') }}"
        style="{{ request()->routeIs('home') ? 'color:#FFFFFF; font-weight:700; text-decoration:underline; text-decoration-color:#FF6B1A; text-underline-offset:6px;' : 'color:rgba(255,255,255,0.75); font-weight:400; text-decoration:none;' }}">Home</a>
     <a href="{{ route('projects') }}"
@@ -30,5 +25,5 @@
         CV
     </button>
 @endif
-    </div>
+
 </header>

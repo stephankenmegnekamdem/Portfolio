@@ -3,10 +3,10 @@
 @section('title', 'Home — ' . config('portfolio.name'))
 
 @section('content')
+<section class="screen">
+        <div class="screen-body">
 
-    <aside>
         <x-menu/>
-    </aside>
 
     <div class="detailed-info">
         @foreach($sections as $key => $section)
@@ -22,10 +22,9 @@
 
             <ul class="my-black">
                 @foreach($section['items'] as $item)
-                    <li class="my-dark">{{ $item }}</li>
+                    <li class="my-dark"><b>Title:</b> {{ $item }}</li>
                 @endforeach
-                <li><b>Nationality:</b> Cameroonian 🇨🇲</li>
-                <li><b>Gender:</b> Male</li>
+                <li><b>Nationality:</b><a href="https://fr.wikipedia.org/wiki/Cameroun"> Cameroon 🇨🇲</a></li>
             </ul>
 
             <p class="my-grey">{{ implode(' ', (array) $section['descriptions']) }}</p>
@@ -102,4 +101,6 @@
         </x-info-section>
     </div>
 
+        </div>
+</section>
 @endsection

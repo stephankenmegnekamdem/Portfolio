@@ -1,4 +1,3 @@
-
 @props(['title', 'icon' => null, 'items' => [], 'descriptions' => []])
 <section class="sections">
     <h2 class="my-black">
