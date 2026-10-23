@@ -3,7 +3,7 @@
 A personal portfolio built with Laravel, Blade, Vite, and plain CSS and JavaScript. It presents my profile, education, work, skills, projects, a printable CV, and a working contact form, in a dark "terminal" visual style.
 
 - **Live site:** (add your URL)
-- **Repository:** https://github.com/stephankenmegnekamdem (add the portfolio repo name)
+- **Repository:** https://github.com/stephankenmegnekamdem/Portfolio
 - **Contact:** set in `.env` as `PORTFOLIO_CONTACT_EMAIL`
 
 ---
