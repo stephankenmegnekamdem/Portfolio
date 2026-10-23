@@ -2,105 +2,183 @@
 
 @section('title', 'Home — ' . config('portfolio.name'))
 
+{{-- Hero and scroll arrow, rendered inside the header slot in the layout --}}
+@section('hero')
+    <br>
+    <br>
+    <x-sections.hero />
+    <x-ui.scroll-cue />
+@endsection
+
 @section('content')
-<section class="screen">
+
+@php
+    $educationNodes = $sections['education'] ?? [];
+
+    // Projects: detailed text from sections, screenshot from the projects list.
+    // Both lists must be in the same order; they are matched by position.
+    $projectNodes = collect($sections['projects'] ?? [])->values()->map(function ($p, $i) use ($projects) {
+        return [
+            'title'        => $p['title'],
+            'icon'         => $projects[$i]['image'] ?? ($p['icon'] ?? null),
+            'items'        => $p['items'] ?? [],
+            'descriptions' => $p['descriptions'] ?? [],
+        ];
+    })->all();
+
+    // Work: each entry becomes its own circle
+    $workNodes = collect($sections['work']['items'] ?? [])->map(function ($item) use ($sections) {
+        return [
+            'title' => $item,
+            'icon'  => $sections['work']['icon'] ?? null,
+        ];
+    })->all();
+
+    // Skills: each skill becomes its own circle
+    $skillNodes = collect($sections['skills']['items'] ?? [])->map(function ($item) {
+        return ['title' => trim($item, " |")];
+    })->all();
+
+    $certs = $sections['certifications'] ?? [];
+@endphp
+
+{{-- Screen 1: menu + personal --}}
+@if(isset($sections['personal']))
+    @php $section = $sections['personal']; @endphp
+
+    <section class="screen" id="about-me">
+        <x-layout.side-nav />
         <div class="screen-body">
 
-        <x-menu/>
+            <div class="personal-layout">
 
-    <div class="detailed-info">
-        @foreach($sections as $key => $section)
+                {{-- Left: identity --}}
+                <div class="identity-card">
+                    @if(!empty($section['icon']))
+                        <img class="identity-photo" src="{{ asset($section['icon']) }}" alt="">
+                    @endif
 
-    @if($key === 'personal')
-        <section class="sections">
-            <h2 class="my-black">
-                @if(!empty($section['icon']))
-                    <img class="my-icons" src="{{ asset($section['icon']) }}" alt="">
-                @endif
-                {{ $section['title'] }}
-            </h2>
+                    <div class="identity-text">
+                        <h2 class="identity-name">{{ $section['title'] }}</h2>
 
-            <ul class="my-black">
-                @foreach($section['items'] as $item)
-                    <li class="my-dark"><b>Title:</b> {{ $item }}</li>
-                @endforeach
-                <li><b>Nationality:</b><a href="https://fr.wikipedia.org/wiki/Cameroun"> Cameroon 🇨🇲</a></li>
-            </ul>
+                        <p class="identity-role">{{ $section['items'][0] ?? '' }}</p>
 
-            <p class="my-grey">{{ implode(' ', (array) $section['descriptions']) }}</p>
-        </section>
-
-    @elseif($key === 'education')
-        <section class="sections">
-            <h2 class="my-black">
-                Education
-            </h2>
-
-            @foreach($section as $education)
-                <div class="education-item">
-                    <h2 class="my-black">
-                        <img class="my-icons" src="{{ asset('images/icons/education.svg') }}" alt="">
-                        {{ $education['title'] }}
-                    </h2>
-
-                    <ul>
-                        @foreach($education['items'] as $item)
-                            <li class="my-dark">{{ $item }}</li>
-                        @endforeach
-                    </ul>
-
-                    <p class="my-grey">{{ implode(' ', (array) $education['descriptions']) }}</p>
+                        @if(!empty($section['nationality']))
+                            <a class="identity-nationality"
+                               href="{{ $section['nationality']['url'] }}"
+                               target="_blank" rel="noopener">
+                                {{ $section['nationality']['label'] }}
+                            </a>
+                        @endif
+                    </div>
                 </div>
-            @endforeach
-        </section>
 
-    @elseif($key === 'projects')
-        <section class="sections">
-            <h2 class="my-black">
-                Project
-            </h2>
+                {{-- Right: expandable panels --}}
+                <div class="personal-accordion">
 
-            @foreach($section as $projects)
-                <div class="education-item">
-                    <h2 class="my-black">
-                        <img class="my-icons" src="{{ asset('images/icons/education.svg') }}" alt="">
-                        {{ $projects['title'] }}
-                    </h2>
+                    <details class="accordion-item">
+                        <summary>
+                            <span class="accordion-title">
+                                Hey 👋
+                                <span class="accordion-hint">click to read</span>
+                            </span>
+                        </summary>
+                        <div class="accordion-body">
+                            <p>{{ implode(' ', (array) $section['descriptions']) }}</p>
+                        </div>
+                    </details>
 
-                    <ul>
-                        @foreach($projects['items'] as $item)
-                            <li class="my-dark">{{ $item }}</li>
-                        @endforeach
-                    </ul>
+                    <details class="accordion-item">
+                        <summary>
+                            <span class="accordion-title">
+                                Facts
+                                <span class="accordion-hint">click to read</span>
+                            </span>
+                        </summary>
+                        <div class="accordion-body">
+                            <ul>
+                                @foreach($section['traits'] ?? [] as $trait)
+                                    <li>{{ $trait }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </details>
 
-                    <p class="my-grey">{{ implode(' ', (array) $projects['descriptions']) }}</p>
+                    <details class="accordion-item">
+                        <summary>
+                            <span class="accordion-title">
+                                Interests
+                                <span class="accordion-hint">click to see</span>
+                            </span>
+                        </summary>
+                        <div class="accordion-body">
+                            <ul class="interest-tags">
+                                @foreach($section['interests'] ?? [] as $interest)
+                                    <li>{{ $interest }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </details>
+
                 </div>
-            @endforeach
-        </section>
-
-    @else
-        <x-info-section
-            :title="$section['title']"
-            :icon="$section['icon']"
-            :items="$section['items']"
-            :descriptions="$section['descriptions']"
-        />
-    @endif
-
-@endforeach
-
-
-
-        <x-info-section title="Certifications">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-            <img class="my-certifications" src="{{ asset('images/certs/cert1.png') }}" alt="Certification">
-        </x-info-section>
-    </div>
-
+            </div>
         </div>
-</section>
+    </section>
+@endif
+
+{{-- Screen 2: education --}}
+@if(!empty($educationNodes))
+    <section class="screen" id="education">
+        <x-layout.side-nav />
+        <div class="screen-body">
+            <x-sections.timeline title="Education" :nodes="$educationNodes" />
+        </div>
+    </section>
+@endif
+
+{{-- Screen 3: projects --}}
+@if(!empty($projectNodes))
+    <section class="screen">
+        <x-layout.side-nav />
+        <div class="screen-body" id="projects">
+            <x-sections.timeline title="Projects" :nodes="$projectNodes" />
+        </div>
+    </section>
+@endif
+
+{{-- Screen 4: work experience --}}
+@if(!empty($workNodes))
+    <section class="screen">
+        <x-layout.side-nav />
+        <div class="screen-body" id="work">
+            <x-sections.timeline title="Work Experience" :nodes="$workNodes" />
+        </div>
+    </section>
+@endif
+
+{{-- Screen 5: skills --}}
+@if(!empty($skillNodes))
+    <section class="screen">
+        <x-layout.side-nav />
+        <div class="screen-body" id="skills">
+            <x-sections.timeline title="Skills" :nodes="$skillNodes" />
+        </div>
+    </section>
+@endif
+
+{{-- Certifications: plain images --}}
+@if(!empty($certs))
+    <section class="screen">
+        <div class="screen-body">
+            <x-layout.side-nav />
+            <section class="sections" id="certifications">
+                <h2 class="my-black">Certifications</h2>
+                @foreach($certs as $cert)
+                    <img class="my-certifications" src="{{ asset($cert) }}" alt="Certification">
+                @endforeach
+            </section>
+        </div>
+    </section>
+@endif
+
 @endsection

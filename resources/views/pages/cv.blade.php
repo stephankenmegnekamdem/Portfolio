@@ -1,266 +1,189 @@
-@extends('components.layouts.cvapp')
+@extends('components.layouts.contact-cvapp')
 
 @section('title', 'CV — ' . config('portfolio.name'))
 
 @section('content')
-<div class="cv-page">
-    <!-- Sidebar: photo, menu, personal details -->
-    <aside>
+    <div class="cv-page">
 
 
-                <a href="#about-me">About</a>
-                <a href="#education">Education</a>
-                <a href="#work">Work</a>
-                <a href="#projects">Projects</a>
-                <a href="#skills">Skills</a>
-                <a href="#certifications">Certifications</a>
+        <div class="detailed-info my-dark">
 
+            <!-- LEFT COLUMN: photo, contact, languages, skills -->
+            <div class="cv-left">
 
-
-    </aside>
-
-    <!-- Detailed info blocks -->
-    <div class="detailed-info my-dark">
-<!-- LEFT COLUMN: profile, about, contact, languages -->
-        <div class="cv-left">
-
-            <div class="profile items-center">
-                <img src="assets/images/PHOTO-2026-09-28-17-15-02.jpg" alt="Photo of Stephan Kenmegne Kamdem">
-            </div>
-            <br>
-
-            <h6 class="my-black"><b>KENMEGNE KAMDEM STEPHAN</b></h6>
-           <br>
-
-
-                <h5 id="about-me">ABOUT ME</h5>
-                <p>
-                    Final-year Bachelor's Software Engineering student with 3.75/4 GPA selected
-                    for an Erasmus+ Internship Mobility and currently undertaking an Erasmus+
-                    Study Mobility at EPITECH Paris. Passionate about programming and software
-                    engineering, with a strong focus on understanding fundamental concepts and
-                    developing clean, efficient, and practical solutions. Eager to continuously
-                    learn new technologies, strengthen technical skills through hands-on
-                    experience, and build an international career in software engineering.
-                </p><br>
-
-
-            <h5><b>Contact</b></h5><br>
-            <p>
-                <a href="https://www.google.com/maps/search/?api=1&query=8+esplanade+de+Chantilly%2C+93330+Neuilly-sur-Marne%2C+France">
-                    <i class="material-icons">place</i> 93330, Neuilly-sur-Marne, France
-                </a>
-            </p>
-            <p>
-                <a href="mailto:kenmgnekamdemstephan@gmail.com">
-                    <i class="material-icons">email</i> kenmgnekamdemstephan@gmail.com
-                </a>
-            </p>
-
-            <p>
-                <a href="https://github.com/stephankenmegnekamdem">
-                    <i class="fa-brands fa-github"></i> GitHub
-                </a>
-            </p>
-            <p>
-                <a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem-84b653350">
-                    <i class="fa-brands fa-linkedin"></i> LinkedIn
-                </a>
-            </p>
-
-            <br>
-
-            <h5><b>Languages</b></h5><br>
-            <p>English: Mother tongue</p>
-            <p>French: Mother tongue</p>
-            <p>Turkish: B2 level</p>
-        </div>
-
-<!-- RIGHT COLUMN: all other sections -->
-        <div class="cv-right">
-
-        <div class="sections" id="education">
-            <h5>EDUCATION & TRAINING</h5>
-
-            <div id="epitech">
-                <h6 class="my-grey">14/09/2026 - CURRENT · Paris, France</h6>
-                <h6 class="my-black">
-                    <a href="https://www.epitech.eu"><img class="my-icons" src="assets/images/images-2.png"></a>
-                    Erasmus+ Study Mobility EPITECH Paris
-                </h6>
-                <p>
-                    Discover IT programme (ongoing exchange semester), gaining hands-on experience and
-                    deepening my foundations in:
-                </p>
-                <ul>
-                    <li>Programming (Python, Java)</li>
-                    <li>Web development (HTML, CSS, JavaScript)</li>
-                    <li>DevOps and project management</li>
-                </ul>
-                <p>EQF level 6</p>
-            </div>
-
-            <div id="nisantasi">
-                <h6 class="my-grey">19/10/2023 - CURRENT · Istanbul, Türkiye</h6>
-                <h6 class="my-black">
-                    <a href="https://www.nisantasi.edu.tr/?dil=eng">
-                        <img class="my-icons" src="assets/images/nisantasi-universitesi-logo-png_seeklogo-383727.png">
-                    </a>
-                    Bachelor's Degree in Software Engineering, Istanbul Nisantasi University
-                </h6>
-
-                <p class="my-grey">Main Subjects</p>
-                <p>
-                    Object-Oriented Programming, Data Structures & Algorithms, Database Management
-                    Systems, Operating Systems, Software Design & Architecture, Advanced Web Programming ·
-                    Software Verification, Validation & Testing, Machine Learning & Pattern Recognition
-                </p>
-
-                <p class="my-grey">Skills Developed</p>
-                <ul>
-                    <li>Application development with Java, PHP and Laravel</li>
-                    <li>System design and requirements analysis</li>
-                    <li>Database design and management</li>
-                    <li>Problem-solving and algorithmic thinking</li>
-                    <li>Software quality and development best practices</li>
-                    <li>Data analysis and statistical reasoning</li>
-                    <li>Project management and collaborative teamwork</li>
-                </ul>
-                <p>Level in EQF: EQF level 6</p>
-            </div>
-
-            <div id="turkish">
-                <h6 class="my-grey">04/02/2023 - 30/06/2023 · Istanbul, Türkiye</h6>
-                <h6 class="my-black">
-                    <a href="https://www.gelisim.edu.tr/en/gelisim-homepage">
-                        <img class="my-icons" src="assets/images/igu-logo_190222902d3d4158b2d007e8a89ea53f.png">
-                    </a>
-                    Turkish Language Preparatory Course, Istanbul Gelisim University
-                </h6>
-                <p>Turkish language acquisition and cultural immersion; development of intercultural communication skills</p>
-            </div>
-
-            <div id="maarif">
-                <h6 class="my-grey">07/09/2020 - 30/07/2022 · Ngaoundere, Cameroon</h6>
-                <h6 class="my-black">
-                    <a href="https://cm.maarifschools.org/page/maarif-college-ngaoundere">
-                        <img class="my-icons" src="assets/images/ZCnRBWE5_400x400.jpg">
-                    </a>
-                    GCE Advanced Level Certificate, MAARIF International College
-                </h6>
-                <p>Took Computer Science, Pure Maths with Mechanics, Physics, Biology, Chemistry.</p>
-                <p>Level in EQF: EQF level 4</p>
-            </div>
-        </div>
-
-        <div class="sections" id="work">
-            <h5>WORK EXPERIENCE</h5>
-            <div id="donbosco">
-                <h6 class="my-black">
-                    <img class="my-icons" src="assets/images/unnamed.png">
-                    Don Bosco Oratorio, Istanbul, Türkiye
-                </h6>
-                <h6 class="my-black">Primary School Volunteer Teacher</h6>
-                <p class="my-grey">01/06/2025 - 14/08/2026</p>
-                <ul>
-                    <li>Taught mathematics, science and basic computer skills (Word, Excel, PowerPoint) to students aged 6 to 14 and completed teacher training sessions</li>
-                    <li>Prepared lessons and explained concepts clearly and accessibly, adapting to each age group</li>
-                    <li>Advised parents and children on improving academic performance</li>
-                    <li>Acted as English-French interpreter between staff, parents and students</li>
-                    <li>Led summer activities and organised educational games</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="sections" id="skills">
-            <h5>SKILLS</h5>
-            <div id="skills1">
-                <h6 class="my-grey">DIGITAL SKILLS</h6>
-                <p>HTML/CSS/JavaScript · Java programming · Microsoft Office · Machine Learning · Python programming · PHP / Laravel Framework · GitHub basics</p>
-                <h6 class="my-grey">SOFT SKILLS</h6>
-                <p>Problem solving · Adapting to change · Communication · Leadership and organisation · Initiative and autonomy</p>
-            </div>
-        </div>
-
-        <div class="sections" id="projects">
-            <h5>PROJECTS</h5>
-
-
-                <div class="project" id="project1">
-                    <h6 class="my-grey">28/01/2026 - 15/06/2026</h6>
-                    <h6 class="my-black">
-                        <img class="my-icons" src="assets/images/fece433e54f817872309273fb46fe6e9.jpg" alt="Laravel e-commerce project screenshot">
-                        <b>Laravel E-commerce Website</b>
-                    </h6>
-                    <ul>
-                        <li>Built a full-stack e-commerce web application with dual admin templates (SB Admin 2 and AdminLTE), both sharing the same MySQL database.</li>
-                        <li>Implemented role-based access control, full CRUD for products/categories/orders, shopping cart, and a public contact form with admin management.</li>
-                    </ul>
-                    <a href="https://github.com/stephankenmegnekamdem/LaravelProject">GitHub link</a>
+                <div class="profile">
+                    <img src="{{ asset('assets/images/PHOTO-2026-09-28-17-15-02.jpg') }}" alt="Photo of Stephan Kenmegne Kamdem">
                 </div>
 
-                <div class="project" id="project2">
-                    <h6 class="my-grey">28/01/2026 - 15/06/2026</h6>
-                    <h6 class="my-black">
-                        <img class="my-icons" src="assets/images/What-Is-Supervised-Learning.jpg" alt="Machine learning pipeline project screenshot">
-                        <b>ML Pipeline – California Housing Price Prediction</b>
-                    </h6>
-                    <ul>
-                        <li>As a team, built a complete machine learning program from data preprocessing to model training and evaluation, with a report and presentation, using the built-in California housing dataset with Random Forest and XGBoost models.</li>
-                        <li>Coordinated all activities as team leader and built the Random Forest model.</li>
+                <h1 class="name">KENMEGNE KAMDEM STEPHAN</h1>
+
+                <section class="block">
+                    <h5>Contact</h5>
+                    <ul class="plain">
+                        <li>Neuilly-sur-Marne, 93330, France</li>
+                        <li><a href="mailto:{{ config('portfolio.email') }}">{{ config('portfolio.email') }}</a></li>
+                        <li><a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem/">linkedin.com/in/stephan-kenmegne-kamdem</a>
+                        </li>
+                        <li><a href="https://github.com/stephankenmegnekamdem">github.com/stephankenmegnekamdem</a></li>
                     </ul>
-                    <a href="https://github.com/stephankenmegnekamdem/Machine_Learning_XGBoost_vs_RandomForest">GitHub link</a>
-                </div>
+                </section>
 
-                <div class="project" id="project3">
-                    <h6 class="my-grey">01/09/2025 - 12/01/2026</h6>
-                    <h6 class="my-black">
-                        <img class="my-icons" src="assets/images/multiplatform.png" alt="Base conversion app screenshot">
-                        <b>Learn Base Conversion</b>
-                    </h6>
-                    <ul>
-                        <li>A Kotlin Multiplatform program to learn how to convert from one base to another, used for the Kotlin annual contest.</li>
-                        <li>Originally written in Java, then refactored to a Jetpack Compose UI with the help of an AI tool.</li>
+                <section class="block">
+                    <h5>Languages</h5>
+                    <ul class="plain">
+                        <li>English: Native</li>
+                        <li>French: Native</li>
+                        <li>Turkish: B2</li>
                     </ul>
-                    <a href="https://github.com/stephankenmegnekamdem/learningbaseconversions">GitHub link</a>
-                </div>
+                </section>
 
-        </div>
+                <section class="block" id="skills">
+                    <h5>Technical Skills</h5>
+                    <ul>
+                        <li><b>Languages:</b> Java, Python, PHP, JavaScript, C, C++, SQL, HTML, CSS</li>
+                        <li><b>Frameworks and tools:</b> Laravel, Git, GitHub, Linux, Microsoft Office</li>
+                        <li><b>Web and data:</b> Web development, REST, JSON, relational databases</li>
+                    </ul>
+                </section>
 
-        <div class="sections" id="certifications">
-            <h5>CERTIFICATIONS</h5>
-
-            <div>
-                <h6 class="my-grey">Istanbul Nisantasi University, 12/08/2025</h6>
-                <h6 class="my-grey">Certificate of Participation: Artificial Intelligence Module 1, 2 and 3</h6>
-                <p>
-                    <img class="my-icons" src="assets/images/Screenshot%202026-10-09%20at%2015.39.27.png"> Module 1: Introducing Artificial Intelligence and using Python<br>
-                    <img class="my-icons" src="assets/images/Screenshot%202026-10-09%20at%2015.39.27.png"> Module 2: Supervised Learning (Classification and Regression)<br>
-                    <img class="my-icons" src="assets/images/Screenshot%202026-10-09%20at%2015.39.27.png"> Module 3: Unsupervised Learning and Reinforcement Learning<br>
-                    Mode of Learning: Online
-                </p>
+                <section class="block">
+                    <h5>Soft Skills</h5>
+                    <ul>
+                        <li>Initiative</li>
+                        <li>Autonomy</li>
+                        <li>Leadership</li>
+                        <li>Problem solving</li>
+                        <li>Adaptability</li>
+                        <li>Communication</li>
+                    </ul>
+                </section>
             </div>
 
-            <div>
-                <h6 class="my-grey">Digital Transformation Office of the Presidency of Türkiye | Digital Genç AI Ecosystem, 25/03/2025</h6>
-                <h6 class="my-grey">
-                    <img class="my-icons" src="assets/images/Screenshot%202026-10-09%20at%2015.38.47.png">
-                    Certificate of Participation: Generative AI Webinar Series – Autoencoder models and Mathematical Foundations of AI – From Vectors to Algorithms
-                </h6>
-                <p>Initiative of the Turkish Government to increase awareness on AI, using mathematics to program</p>
-            </div>
+            <!-- RIGHT COLUMN -->
+            <div class="cv-right">
 
-            <div>
-                <h6 class="my-grey">Ministry of Transport and Infrastructure and Ministry of Agriculture and Forestry of Türkiye, 30/04/2025</h6>
-                <h6 class="my-grey">
-                    <img class="my-icons" src="assets/images/Screenshot%202026-10-09%20at%2015.38.03.png">
-                    Green Citizen Awards
-                </h6>
-                <p>Took a high speed train during the "every ticket a sapling" campaign for a greener country</p>
+                <section class="block" id="about-me">
+                    <h5>About Me</h5>
+                    <p>
+                        Final-year Software Engineering student (GPA 3.75/4) with solid foundations in Java,
+                        Python, PHP and JavaScript, and hands-on experience building full-stack web applications
+                        with Laravel and React. Skilled in REST APIs, database design, machine learning and Git,
+                        with a focus on clean, maintainable code. Currently on an Erasmus+ exchange at EPITECH
+                        Paris, seeking a final-year internship to contribute to a real product within an
+                        engineering team.
+                    </p>
+                </section>
+
+                <section class="block" id="education">
+                    <h5>Education &amp; Training</h5>
+
+                    <div class="entry" id="epitech">
+                        <div class="entry-head">
+                            <span class="entry-title">Erasmus+ Study Mobility, EPITECH Paris</span>
+                            <span class="entry-date">14/09/2026 - Current · Paris, France</span>
+                        </div>
+                        <p class="entry-sub">EQF level 6</p>
+                        <ul>
+                            <li>Web development: HTML, CSS, JavaScript, JSON, PHP and database connections for building
+                                responsive interfaces, with projects in progress
+                            </li>
+                            <li>Python: programming fundamentals and scripting, applied in data and machine learning
+                                work
+                            </li>
+                            <li>Java: object-oriented programming, currently deepening my knowledge through coursework
+                            </li>
+                            <li>Video programming: introduction to graphics and multimedia programming</li>
+                            <li>DevOps: version control workflows and deployment basics</li>
+                            <li>Portfolio: personal website built with Laravel, in progress</li>
+                            <li>Job Board: web application in progress</li>
+                            <li>Marvin and Popeye: in progress</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry" id="nisantasi">
+                        <div class="entry-head">
+                            <span class="entry-title">Bachelor's Degree in Software Engineering, Istanbul Nisantasi University</span>
+                            <span class="entry-date">19/10/2023 - Current · Istanbul, Türkiye</span>
+                        </div>
+                        <p class="entry-sub">EQF level 6</p>
+                        <ul>
+                            <li>Programming and algorithms: object-oriented programming (Java), data structures and
+                                algorithms, algorithmic problem-solving
+                            </li>
+                            <li>Web and backend: advanced web programming with PHP and Laravel, application development,
+                                REST-style backend design
+                            </li>
+                            <li>Databases: database management systems, relational schema design, data management</li>
+                            <li>Software engineering: software design and architecture, system design, requirements
+                                analysis, software development lifecycle
+                            </li>
+                            <li>Quality assurance: software verification, validation and testing</li>
+                            <li>Data and machine learning: machine learning and pattern recognition, statistical
+                                analysis, data analysis
+                            </li>
+                            <li>Collaboration: teamwork on collaborative software projects</li>
+                        </ul>
+                    </div>
+
+                </section>
+
+                <section class="block" id="work">
+                    <h5>Work Experience</h5>
+                    <div class="entry" id="donbosco">
+                        <div class="entry-head">
+                            <span class="entry-title">Primary School Volunteer Teacher, Don Bosco Oratorio</span>
+                            <span class="entry-date">06/2025 – 08/2026 · Istanbul, Türkiye</span>
+                        </div>
+                        <ul>
+                            <li>Taught mathematics, science and basic computer skills (Word, Excel, PowerPoint) to
+                                students aged 6 to 14, and prepared lessons adapted to each age group
+                            </li>
+                            <li>Acted as English-French interpreter between staff, parents and students, and advised
+                                parents on academic progress
+                            </li>
+                            <li>Organised educational activities and games during summer programmes</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="block" id="projects">
+                    <h5>Projects</h5>
+
+                    <div class="entry project" id="project1">
+                        <div class="entry-head">
+                            <span class="entry-title">Laravel E-commerce Website (Coursework)</span>
+                            <span class="entry-date">01/2026 – 06/2026</span>
+                        </div>
+                        <p>Full-stack e-commerce app with role-based access control, full CRUD, a shopping cart, and two
+                            admin interfaces (SB Admin 2, AdminLTE) on MySQL.
+                            <a href="https://github.com/stephankenmegnekamdem/LaravelProject">GitHub</a></p>
+                    </div>
+
+                    <div class="entry project" id="project2">
+                        <div class="entry-head">
+                            <span
+                                class="entry-title">ML Pipeline: California Housing Price Prediction (Team Lead)</span>
+                            <span class="entry-date">01/2026 – 06/2026</span>
+                        </div>
+                        <p>End-to-end regression pipeline with a tuned Random Forest model benchmarked against XGBoost.
+                            Led the team's tasks, report and presentation.
+                            <a href="https://github.com/stephankenmegnekamdem/Machine_Learning_XGBoost_vs_RandomForest">GitHub</a>
+                        </p>
+                    </div>
+
+                    <div class="entry project" id="project3">
+                        <div class="entry-head">
+                            <span class="entry-title">Learn Base Conversion</span>
+                            <span class="entry-date">09/2025 – 01/2026</span>
+                        </div>
+                        <p>Base-conversion tool first written in Java, then ported to a Kotlin Multiplatform app with a
+                            Jetpack Compose interface.
+                            <a href="https://github.com/stephankenmegnekamdem/learningbaseconversions">GitHub</a></p>
+                    </div>
+                </section>
+
             </div>
-        </div>
         </div>
     </div>
-</div>
 
 @endsection

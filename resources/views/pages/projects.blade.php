@@ -1,18 +1,19 @@
-@extends("components.layouts.app")
+@extends('components.layouts.app')
+
+@section('term', 'cd projects')
+
 @section('title', 'Projects — ' . config('portfolio.name'))
+
+{{-- Project tile grid and scroll arrow, rendered inside the header slot --}}
+@section('hero')
+    <br>
+    <br>
+    <x-sections.project-grid :projects="$projects" />
+    <x-ui.scroll-cue />
+@endsection
+
 @section('content')
-<section class="screen">
-        <div class="screen-body">
-    <aside>
-             @foreach($projects as $project)
-            <a href="#!">{{ $project['title'] }}</a><br>
-            @endforeach
-    </aside>
-    <div class="detailed-info">
-             @foreach($projects as $project)
-                <x-project-card :project="$project" />
-            @endforeach
-    </div>
-        </div>
-</section>
+    @foreach($projects as $project)
+        <x-sections.project-screen :project="$project" />
+    @endforeach
 @endsection

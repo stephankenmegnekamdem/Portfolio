@@ -1,0 +1,155 @@
+/* ===== TIMELINE (education, projects, work, skills) ===== */
+
+/* Circle size shrinks as the number of items grows, clamped to a usable range.
+   The --n value is set inline by the timeline component. */
+.timeline-section {
+    --size: clamp(36px, calc((100dvh - 15rem) / var(--n, 1) - 1.5rem), 104px);
+}
+
+.timeline-hint {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    margin: 0 0 1rem;
+}
+
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.timeline-node {
+    position: relative;
+}
+
+/* The line linking one circle to the next */
+.timeline-node:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--size) / 2 - 1px);
+    top: var(--size);
+    bottom: -1.25rem;
+    width: 2px;
+    background: var(--color-border);
+}
+
+.node-summary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    list-style: none;
+}
+
+.node-summary::-webkit-details-marker {
+    display: none;
+}
+
+/* The circle */
+.node-circle {
+    position: relative;
+    flex-shrink: 0;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 2px solid var(--color-accent);
+    background-color: var(--color-surface);
+    display: grid;
+    place-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.node-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.node-initial {
+    font-size: calc(var(--size) * 0.4);
+    font-weight: 700;
+    color: var(--color-accent);
+}
+
+.node-summary:hover .node-circle {
+    transform: scale(1.06);
+    box-shadow: 0 0 0 4px rgb(var(--color-accent-rgb) / 0.25);
+}
+
+/* Small "+" badge that shows the circle opens */
+.node-plus {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    font-weight: 700;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    transition: transform 0.2s ease;
+}
+
+.node[open] .node-plus {
+    transform: rotate(45deg);
+}
+
+.node-title {
+    flex: 1;
+    min-width: 0;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.node-hint {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+}
+
+.node-hint::after {
+    content: " ▾";
+}
+
+.node[open] .node-hint::after {
+    content: " ▴";
+}
+
+/* The dropdown, indented to sit beside the circle */
+.node-body {
+    margin: 0.75rem 0 0 calc(var(--size) + 1rem);
+    padding: 1rem 1.25rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    line-height: 1.6;
+}
+
+.node-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0 0 0.5rem;
+}
+
+.node-body p {
+    margin: 0.25rem 0;
+}
+
+/* Items without details: no plus, no hint, no click */
+.node--static .node-summary {
+    cursor: default;
+    pointer-events: none;
+}
+
+.node--static .node-plus,
+.node--static .node-hint {
+    display: none;
+}

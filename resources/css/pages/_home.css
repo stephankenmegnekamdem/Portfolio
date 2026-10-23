@@ -1,0 +1,42 @@
+/* ===== HOME: CONTENT SECTIONS AND CERTIFICATIONS ===== */
+/* A bordered panel that wraps the timelines and the certifications */
+.sections {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+
+    /* Text containment: long words and URLs must not overflow the panel */
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.sections h2 {
+    color: var(--color-accent) ;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.sections ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.my-certifications {
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 767px) {
+    .my-certifications {
+        width: 100%;
+    }
+}

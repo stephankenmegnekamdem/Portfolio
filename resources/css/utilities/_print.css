@@ -1,0 +1,29 @@
+/* ===== PRINT ===== */
+/* Hide the chrome: nav, footer, and the contact info panel */
+@media print {
+    header,
+    footer,
+    aside {
+        display: none !important;
+    }
+
+    /* Let the whole page flow onto paper instead of using snap screens */
+    .snap-container,
+    .screen,
+    .screen-body {
+        height: auto !important;
+        overflow: visible !important;
+        scroll-snap-type: none !important;
+    }
+
+    .sections {
+        break-inside: avoid;
+    }
+
+    /* The CV fills the page width on paper */
+    .cv-page .detailed-info {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+}

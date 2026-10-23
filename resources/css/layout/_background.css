@@ -1,0 +1,28 @@
+/* ===== TERMINAL BACKGROUND (all pages except CV and contact) ===== */
+body:not(.plain-page) {
+    background-color: var(--color-bg-deep);
+    background-image:
+        linear-gradient(rgb(var(--color-accent-rgb) / 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+}
+
+/* Faint scanlines over the whole page */
+body:not(.plain-page)::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgb(var(--color-accent-rgb) / 0.04) 0 1px,
+        transparent 1px 4px
+    );
+}
+
+/* Let the terminal background show through the header and footer bands */
+body:not(.plain-page) .screen-header,
+body:not(.plain-page) .screen-footer {
+    background-color: transparent;
+}

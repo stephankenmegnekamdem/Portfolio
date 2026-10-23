@@ -1,0 +1,7 @@
+/* ===== FOOTER ===== */
+footer {
+    flex-shrink: 0;
+    padding: 20px;
+    background: linear-gradient(90deg, var(--color-chrome-start), var(--color-chrome-end));
+    border-top: 2px solid var(--color-border);
+}

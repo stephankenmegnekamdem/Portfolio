@@ -1,4 +1,36 @@
+/* Tailwind must come first */
 @import 'tailwindcss';
+
+/* 1. Tokens and base */
+@import './base/_variables.css';
+@import './base/_base.css';
+
+/* 2. Layout */
+@import './layout/_screen.css';
+@import './layout/_background.css';
+@import './layout/_header.css';
+@import './layout/_footer.css';
+@import './layout/_side-nav.css';
+
+/* 3. Components */
+@import './components/_accordion.css';
+@import './components/_timeline.css';
+@import './components/_cards.css';
+@import './components/_buttons.css';
+@import './components/_scroll-cue.css';
+@import './components/_contact-form.css';
+@import './components/_motion.css';
+
+/* 4. Pages */
+@import './pages/_home.css';
+@import './pages/_projects.css';
+@import './pages/_cv.css';
+@import './pages/_contact.css';
+
+/* 5. Utilities. Print last, so it overrides the page rules. */
+@import './utilities/_terminal.css';
+@import './utilities/_print.css';
+
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,309 +38,4 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-}
-
-/* ===== COLOR TOKENS =====
-   Dark surfaces:  #0F172A (page), #0C1A2E (inset), #1E293B (dropdown)
-   Text:           #E2E8F0 (primary), #94A3B8 (secondary)
-   Accent:         #60A5FA (headings, hover, links on dark)
-   Chrome:         #1E3A8A / #1D4ED8 (header and footer gradient only)
-   Borders:        #2B4C7E (decorative) */
-/* ===== SNAP CONTAINER ===== */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-/* ===== BASE: PAGE FRAME ===== */
-body {
-    background-color: #0F172A;
-    display: block;               /* replaces the old flex column */
-}
-.snap-container {
-    height: 100vh;
-    height: 100dvh;               /* correct height on phones with moving browser bars */
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-}
-/* ===== EACH SCREEN FILLS THE VIEWPORT ===== */
-.screen {
-    height: 100vh;
-    height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;     /* don't skip past a screen in one flick */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;             /* the inner body scrolls instead */
-    box-sizing: border-box;
-}
-/* Scrollable inner area, so long content stays inside its screen */
-.screen-body {
-    flex: 1;
-    min-height: 0;                /* required so flex children can shrink and scroll */
-    overflow-y: auto;
-    overscroll-behavior: contain;  /* don't pass scroll to the outer container at the edge */
-    padding: 24px;
-    box-sizing: border-box;
-}
-.screen-header,
-.screen-footer {
-    background-color: #0F172A;
-}
-
-/* ===== BASE: TEXT COLORS ===== */
-.my-black { color: #E2E8F0 !important; }
-.my-dark  { color: #94A3B8 !important; }
-.my-grey  { color: #94A3B8 !important; }
-
-/* ===== BASE: LINKS ===== */
-a { color: #38BDF8; }
-a:hover { color: #7DD3FC; text-decoration: underline; }
-
-/* ===== HEADER ===== */
-header {
-    flex-shrink: 0;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: linear-gradient(90deg, #1E3A8A, #1D4ED8);
-    border-bottom: 2px solid #2B4C7E;
-}
-
-.profile {
-    width: 50%;
-    margin: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.profile img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 3px solid #2B4C7E;
-    border-radius: 50%;
-}
-
-.page-title {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    color: #E2E8F0;
-}
-.page-title:hover { color: #60A5FA; }
-
-
-/* ===== FOOTER ===== */
-footer {
-    flex-shrink: 0;
-    padding: 20px;
-    background: linear-gradient(90deg, #1E3A8A, #1D4ED8);
-    border-top: 2px solid #2B4C7E;
-}
-
-/* ===== ASIDE ===== */
-aside {
-    width: auto;
-    margin: 30px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #0F172A;
-    border: 1px solid #2B4C7E;
-    border-radius: 10px;
-}
-
-/* ===== DROPDOWN ===== */
-#dropdown-content {
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #1E293B;
-}
-
-/* ===== PROJECTS ===== */
-.projects-container {
-    display: flex;
-    flex-wrap: wrap;             /* thumbnails wrap on small widths */
-    justify-content: center;
-    gap: 10px;
-}
-
-.project img {
-    max-width: 130px;
-    border: 2px solid #2B4C7E;
-    border-radius: 8px;
-}
-
-/* ===== SECTIONS & DETAILED INFO: education / work / skills / certs ===== */
-.sections {
-    display: flex;
-    flex-direction: column;
-    padding: 30px;
-    background-color: #0F172A;   /* so you can see each block */
-    border: 1px solid #2B4C7E;
-    border-radius: 8px;
-    color: #E2E8F0;
-
-    /* --- text containment --- */
-    min-width: 0;                  /* let flexbox shrink me below my content size */
-    max-width: 100%;               /* never grow past my parent */
-    overflow-wrap: break-word;     /* break long words/URLs instead of overflowing */
-    box-sizing: border-box;
-}
-
-.sections h2 {
-    color: #60A5FA !important;
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.sections ul {
-    list-style: disc;
-    padding-left: 20px;
-}
-
-.detailed-info {
-    margin: 30px;
-    padding: 10px;
-    background-color: #0C1A2E;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.my-icons {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-}
-
-.my-certifications {
-    width: 400px;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-/* ===== CV PAGE LAYOUT ===== */
-.cv-page .detailed-info {
-    width: auto;
-    padding: 2px;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
-.cv-page .cv-left {
-    width: 32%;
-    padding: 2px;
-    background-color: #0F172A;
-    border: 1px solid #2B4C7E;
-    border-radius: 10px;
-
-    /* --- text containment --- */
-    min-width: 0;
-    max-width: 100%;
-    overflow-wrap: break-word;
-}
-
-.cv-page .cv-right {
-    width: 68%;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-
-    /* --- text containment --- */
-    min-width: 0;
-    max-width: 100%;
-    overflow-wrap: break-word;
-}
-
-.cv-page .sections {
-    background-color: #0F172A;
-    border: 1px solid #2B4C7E;
-    border-radius: 10px;
-    padding: 2px;
-    gap: 5px;
-}
-
-.cv-page h5 {
-    color: #60A5FA;
-    border-bottom: 1px solid #2B4C7E;
-}
-
-/* Phones */
-@media (max-width: 767px) {
-    .screen-body {
-        padding: 16px;
-    }
-
-    .profile img {
-        width: 65px;
-        height: 65px;
-    }
-
-    .my-certifications {
-        width: 100%;
-    }
-
-    .cv-page .detailed-info {
-        flex-direction: column;   /* stack CV columns on phones */
-    }
-
-    .cv-page .cv-left,
-    .cv-page .cv-right {
-        width: 100%;
-    }
-
-}
-
-/* Tablets and laptops */
-@media (min-width: 768px) {
-    .screen-body {
-        padding: 40px;
-        max-width: 1100px;
-        margin: 0 auto;
-        width: 100%;
-    }
-}
-
-/* Large screens */
-@media (min-width: 1280px) {
-    .screen-body {
-        padding: 56px;
-    }
-}
-/* ===== PRINT ===== */
-/* ===== PRINT ===== */
-@media print {
-    header,
-    footer,
-    aside {
-        display: none !important;
-    }
-
-    .snap-container,
-    .screen,
-    .screen-body {
-        height: auto !important;
-        overflow: visible !important;
-        scroll-snap-type: none !important;
-    }
-
-    .sections {
-        break-inside: avoid;
-    }
 }

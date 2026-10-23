@@ -1,0 +1,148 @@
+/* ===== CV PAGE ===== */
+/* Two-column grid: a left sidebar (photo, contact, skills) and a right column (experience) */
+.cv-page .detailed-info {
+    display: grid;
+    grid-template-columns: 32% 1fr;
+    gap: 8px;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: var(--color-surface);
+    max-width: 210mm;
+}
+
+.cv-page .cv-left,
+.cv-page .cv-right {
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+.cv-page .cv-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.cv-page .cv-right {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cv-page .block {
+    padding: 8px 10px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+/* Photo at the top of the sidebar. These rules used to be global (.profile),
+   which would have affected any future use of that class. */
+.cv-page .profile {
+    width: 50%;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cv-page .profile img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    border: 3px solid var(--color-border);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cv-page .name {
+    margin: 4px 0 2px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: var(--color-accent);
+}
+
+.cv-page h5 {
+    margin: 0 0 5px;
+    padding-bottom: 2px;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--color-accent);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cv-page p {
+    margin: 0 0 3px;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.cv-page ul {
+    margin: 0;
+    padding-left: 14px;
+    list-style: disc;
+    font-size: 11px;
+    line-height: 1.35;
+}
+
+.cv-page ul.plain {
+    padding-left: 0;
+    list-style: none;
+}
+
+.cv-page li {
+    margin: 0 0 1px;
+    overflow-wrap: anywhere;
+}
+
+.cv-page .entry {
+    margin-bottom: 5px;
+}
+
+.cv-page .entry:last-child {
+    margin-bottom: 0;
+}
+
+.cv-page .entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2px 8px;
+}
+
+.cv-page .entry-title {
+    font-weight: 600;
+    color: var(--color-text-strong);
+}
+
+.cv-page .entry-date {
+    font-size: 10px;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.cv-page .entry-sub {
+    margin: 0 0 2px;
+    font-size: 10px;
+    color: var(--color-text-muted);
+}
+
+/* Phones: stack the two columns.
+   NOTE: the original file also had `flex-direction: column` on the grid above.
+   That has no effect on a grid, so it was removed. The phone layout is still a
+   two-column grid, exactly as before. Making it a single column is a visual
+   change, so it needs your approval first. */
+@media (max-width: 767px) {
+    .cv-page .cv-left,
+    .cv-page .cv-right {
+        width: 100%;
+    }
+}

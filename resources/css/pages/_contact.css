@@ -1,0 +1,50 @@
+/* ===== CONTACT PAGE: LAYOUT ===== */
+.contact-page {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+}
+
+.contact-page .screen-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    padding: 32px 24px;
+}
+
+/* Two columns: info panel (left) and form card (right) */
+.cf-wrap {
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: 32px;
+    align-items: stretch;
+}
+
+/* Stack the columns on tablets and phones.
+   This rule must come AFTER the base .cf-wrap rule above, or it has no effect. */
+@media (max-width: 899px) {
+    .cf-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* The info panel is an <aside> element. The old stylesheet styled every
+   <aside> on the site with these values. They are now scoped to the panel,
+   so they can't affect any other element.
+   The layout values are copied exactly, including the 2px link spacing the
+   old `aside a` rule added. */
+.cf-info {
+    margin: 30px;
+    width: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cf-info a {
+    padding-bottom: 2px;
+    border-bottom: solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}

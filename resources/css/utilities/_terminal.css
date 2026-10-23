@@ -1,0 +1,61 @@
+/* ===== TERMINAL: TYPED COMMAND LINE ===== */
+.term-line {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 40;
+    padding: 6px 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    background-color: rgb(var(--color-bg-deep-rgb, 5 11 22) / 0.85);
+    border: 1px solid var(--color-chrome-start);
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.term-line.is-on {
+    opacity: 1;
+}
+
+/* On the CV and contact pages the line sits fixed in the top corner */
+.term-line--fixed {
+    position: fixed;
+}
+
+/* Blinking cursor */
+.term-cursor {
+    animation: term-blink 1s steps(1) infinite;
+}
+
+@keyframes term-blink {
+    50% { opacity: 0; }
+}
+
+/* ===== TERMINAL: PIXELATED IMAGES ===== */
+.is-pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* ===== TERMINAL: FOOTER MESSAGE ===== */
+.footer-terminal {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color: var(--color-accent);
+    font-size: 1rem;
+    line-height: 1.7;
+    white-space: pre-line;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .term-cursor {
+        animation: none;
+    }
+
+    .term-line {
+        transition: none;
+    }
+}

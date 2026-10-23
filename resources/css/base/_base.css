@@ -1,0 +1,24 @@
+/* ===== BASE: DEFAULTS FOR EVERY PAGE ===== */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: var(--color-bg);
+    display: block;
+}
+
+a {
+    color: var(--color-link);
+}
+
+a:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+}
+
+
+.my-black { color: var(--color-text) ; }
+.my-dark  { color: var(--color-text-muted) ; }
+.my-grey  { color: var(--color-text-muted) ; }

@@ -1,30 +1,19 @@
-//
-document.addEventListener('DOMContentLoaded', function () {
+import { initScrollCue } from './modules/scroll-cue';
+import { initProgressBar } from './modules/progress-bar';
+import { initReveal } from './modules/reveal';
+import { initContactForm } from './modules/contact-form';
+import { initCopyButtons } from './modules/copy-button';
+import { initPrintButton } from './modules/print-button';
+import { initSideNav } from './modules/side-nav';
+import { initTerminal } from './modules/terminal';
+import { initTypewriter } from './modules/typewriter';
 
-    const button = document.getElementById('dropdown-trigger');
-
-    const content = document.getElementById('dropdown-content');
-
-    if (!button || !content) return;
-
-    button.addEventListener('click', function (event) {
-
-        event.stopPropagation();
-
-        content.classList.toggle('hidden');
-
-    });
-
-    document.addEventListener('click', function (event) {
-
-        if (!button.contains(event.target) && !content.contains(event.target)) {
-
-            content.classList.add('hidden');
-
-        }
-
-    });
-
-});
-
-
+initScrollCue();
+initProgressBar();
+initReveal();
+initContactForm();
+initCopyButtons();
+initPrintButton();
+initSideNav();
+initTerminal();
+initTypewriter();

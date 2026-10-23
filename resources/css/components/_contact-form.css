@@ -1,0 +1,298 @@
+/* ===== CONTACT FORM: INFO PANEL ===== */
+.cf-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px 32px;
+    background: linear-gradient(160deg, var(--color-chrome-start) 0%, var(--color-surface) 70%);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+}
+
+.cf-eyebrow {
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.cf-title {
+    color: var(--color-text-strong);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.cf-lead {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.cf-links {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cf-links li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-text);
+    overflow-wrap: anywhere;
+}
+
+.cf-links i {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background-color: rgb(var(--color-accent-rgb) / 0.12);
+    color: var(--color-accent);
+}
+
+.cf-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cf-links a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+.cf-reply {
+    margin: auto 0 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.cf-reply i {
+    color: var(--color-accent);
+    margin-right: 6px;
+}
+
+/* ===== CONTACT FORM: CARD AND FIELDS ===== */
+.cf-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.cf-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.cf-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.cf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.cf-field label,
+.cf-field legend {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0;
+    margin-bottom: 2px;
+}
+
+.cf-optional {
+    color: var(--color-text-faint);
+    font-weight: 400;
+    font-size: 0.75rem;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.cf-field input,
+.cf-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 13px 16px;
+    font: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cf-field textarea {
+    resize: vertical;
+    min-height: 150px;
+    line-height: 1.55;
+}
+
+.cf-field input::placeholder,
+.cf-field textarea::placeholder {
+    color: #475569;
+}
+
+.cf-field input:hover,
+.cf-field textarea:hover {
+    border-color: var(--color-border-hover);
+}
+
+.cf-field input:focus,
+.cf-field textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgb(var(--color-accent-rgb) / 0.18);
+}
+
+/* ===== CONTACT FORM: TOPIC CHIPS (radio buttons styled as pills) ===== */
+.cf-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cf-chip {
+    position: relative;
+    cursor: pointer;
+}
+
+.cf-chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cf-chip span {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.cf-chip:hover span {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+}
+
+.cf-chip input:checked + span {
+    background-color: rgb(var(--color-accent-rgb) / 0.15);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+.cf-chip input:focus-visible + span {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ===== CONTACT FORM: MESSAGES AND SUBMIT ===== */
+.cf-error {
+    color: #F87171;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.cf-success {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgb(34 197 94 / 0.1);
+    border: 1px solid rgb(34 197 94 / 0.5);
+    color: var(--color-text);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    margin-bottom: 24px;
+}
+
+.cf-success i {
+    color: #4ADE80;
+}
+
+/* Honeypot: off-screen, invisible to people */
+.cf-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.cf-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cf-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #1D4ED8, #3B82F6);
+    color: var(--color-white);
+    border: 0;
+    border-radius: var(--radius-md);
+    padding: 13px 28px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 8px 20px -8px rgb(59 130 246 / 0.6);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cf-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -8px rgb(59 130 246 / 0.7);
+}
+
+.cf-submit:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* ===== CONTACT FORM: RESPONSIVE ===== */
+
+@media (max-width: 599px) {
+    .cf-card,
+    .cf-info {
+        padding: 24px;
+    }
+
+    .cf-row {
+        grid-template-columns: 1fr;
+    }
+
+    .cf-submit {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .cf-actions {
+        justify-content: stretch;
+    }
+}

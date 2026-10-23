@@ -1,0 +1,136 @@
+/* ===== ACCORDION (details/summary panels) ===== */
+
+/* Personal layout: two columns on desktop, one on phones */
+.personal-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) 2fr;
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+@media (max-width: 767px) {
+    .personal-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.personal-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.accordion-item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-item:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 1px rgb(var(--color-accent-rgb) / 0.3);
+}
+
+.accordion-item[open] {
+    border-color: var(--color-accent);
+}
+
+.accordion-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.accordion-item summary:hover {
+    background-color: rgb(var(--color-accent-rgb) / 0.08);
+}
+
+/* Hide the browser's default triangle */
+.accordion-item summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Plus sign on the right, which turns into a minus when open */
+.accordion-item summary::after {
+    content: "+";
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-accent);
+    transition: transform 0.2s ease;
+}
+
+.accordion-item[open] summary::after {
+    content: "−";
+}
+
+.accordion-hint {
+    margin-left: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.accordion-body {
+    padding: 0 1.25rem 1.25rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+.accordion-body ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 0;
+}
+
+.accordion-body li + li {
+    margin-top: 0.4rem;
+}
+
+.accordion-body p {
+    margin: 0;
+}
+
+/* Interest pills */
+.accordion-body .interest-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.accordion-body .interest-tags li {
+    margin: 0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+/* Project screen dropdowns: zigzag in two columns */
+.zigzag {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+    margin-top: 16px;
+}
+
+.zigzag > .accordion-item:nth-child(even) {
+    margin-top: 2.5rem;
+}

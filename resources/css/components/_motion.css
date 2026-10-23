@@ -1,0 +1,38 @@
+/* ===== SCROLL PROGRESS BAR ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-link));
+    z-index: 1000;
+    pointer-events: none;
+    transition: width 0.1s linear;
+}
+
+/* ===== REVEAL ON SCROLL =====
+   Only applies when JavaScript has added the .reveal class,
+   so content stays visible if the script doesn't run. */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .scroll-progress {
+        transition: none;
+    }
+}

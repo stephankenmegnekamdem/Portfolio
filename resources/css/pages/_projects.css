@@ -1,0 +1,6 @@
+/* ===== PROJECTS: JUMP TARGETS ===== */
+/* When a tile or nav link jumps to a project, stop the content
+   from hiding under the fixed nav bar. */
+.project {
+    scroll-margin-top: 6vh;
+}

@@ -1,0 +1,64 @@
+/* ===== PAGE FRAME: SNAP SCROLL AND SCREENS ===== */
+.snap-container {
+    height: 100vh;
+    height: 100dvh;               /* correct height on phones with moving browser bars */
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Each screen fills the viewport */
+.screen {
+    height: 100vh;
+    height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;     /* don't skip past a screen in one flick */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;             /* the inner body scrolls instead */
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Scrollable inner area of a screen */
+.screen-body {
+    flex: 1;
+    min-height: 0;                /* lets flex children shrink and scroll */
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--space-screen);
+    box-sizing: border-box;
+}
+
+.screen-header,
+.screen-footer {
+    background-color: var(--color-bg);
+}
+
+/* Keep content clear of the side nav tab on home screens */
+.screen:has(.side-nav) .screen-body {
+    padding-left: 48px;
+}
+
+/* Screen padding by breakpoint. Order matters: each later block overrides the earlier one. */
+@media (max-width: 767px) {
+    .screen-body {
+        padding: var(--space-screen-phone);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1279px) {
+    .screen-body {
+        padding: var(--space-screen-tablet);
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .screen-body {
+        padding: var(--space-screen-desktop);
+    }
+}

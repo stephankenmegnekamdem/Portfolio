@@ -1,0 +1,40 @@
+/* ===== HEADER AND NAV ===== */
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, var(--color-chrome-start), var(--color-chrome-end));
+    border-bottom: 2px solid var(--color-border);
+}
+
+/* Nav links: muted by default, highlighted for the current page.
+   These rules replace the inline styles that used to be in header.blade.php. */
+.nav-link {
+    color: var(--color-nav-text);
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+    color: var(--color-nav-text);
+    text-decoration: none;
+}
+
+.nav-link.is-active,
+.nav-link.is-active:hover,
+.nav-link.is-active:focus-visible {
+    color: var(--color-white);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-highlight);
+    text-underline-offset: 6px;
+}
