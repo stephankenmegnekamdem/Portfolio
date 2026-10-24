@@ -31,6 +31,7 @@
         return [
             'title' => $item,
             'icon'  => $sections['work']['icon'] ?? null,
+            'descriptions' => $sections['work']['descriptions'] ?? [],
         ];
     })->all();
 

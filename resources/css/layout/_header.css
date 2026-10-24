@@ -12,7 +12,7 @@ header {
     align-items: center;
     justify-content: space-between;
     background: linear-gradient(90deg, var(--color-chrome-start), var(--color-chrome-end));
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 2px solid var(--color-chrome-border);
 }
 
 /* Nav links: muted by default, highlighted for the current page.
@@ -37,4 +37,33 @@ header {
     text-decoration: underline;
     text-decoration-color: var(--color-highlight);
     text-underline-offset: 6px;
+}
+
+/* ===== THEME TOGGLE (right end of the nav) ===== */
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgb(255 255 255 / 0.08);
+    color: var(--color-nav-text);
+    border: 1px solid rgb(255 255 255 / 0.25);
+    border-radius: 999px;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    color: var(--color-white);
+    background: rgb(255 255 255 / 0.16);
+    outline: none;
+}
+
+@media (max-width: 767px) {
+    .theme-toggle-label {
+        display: none;      /* icon only on phones, to keep the nav on one line */
+    }
 }

@@ -31,6 +31,10 @@
         CV
         </button>
     @endif
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Change colour theme">
+            <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
+            <span class="theme-toggle-label">Theme</span>
+        </button>
 </div>
 
 {{-- Page-specific content (hero on home, project grid on projects) comes in through the slot --}}

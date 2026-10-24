@@ -18,7 +18,10 @@ export function initReveal() {
         });
     }, { root: container, threshold: 0.15 });
 
-    document.querySelectorAll(SELECTOR).forEach((el) => {
+        document.querySelectorAll(SELECTOR).forEach((el) => {
+        // Elements inside a [data-no-reveal] container are shown straight away
+        if (el.closest('[data-no-reveal]')) return;
+
         el.classList.add('reveal');
         observer.observe(el);
     });

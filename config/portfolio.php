@@ -17,9 +17,11 @@ return [
 
         // New keys (all optional)
         'screenshots' => [
-            'assets/images/projects/ecommerce/home.png',
-            'assets/images/projects/ecommerce/cart.png',
-            'assets/images/projects/ecommerce/admin-orders.png',
+            'assets/images/projects/ecommerce/homepage.png',
+            'assets/images/projects/ecommerce/Login.png',
+            'assets/images/projects/ecommerce/adminltepanel.png',
+            'assets/images/projects/ecommerce/sbadminpanel.png',
+            'assets/images/projects/ecommerce/cartpage.png'
         ],
         'technologies' => ['Laravel 10', 'PHP 8.1', 'MySQL', 'Spatie Permission', 'CKEditor 5', 'Bootstrap 4 and 5'],
         'why' => 'It shows I can build a complete system end to end: data model, authentication, roles, and two admin interfaces over one database.',
@@ -39,8 +41,8 @@ return [
         'url' => 'https://github.com/stephankenmegnekamdem/Machine_Learning_XGBoost_vs_RandomForest',
 
         'screenshots' => [
-            'assets/images/projects/ml/feature-correlations.png',
-            'assets/images/projects/ml/model-comparison.png',
+            'assets/images/projects/ml/comparism.png',
+            'assets/images/projects/ml/present.png',
         ],
         'technologies' => ['Python', 'scikit-learn', 'XGBoost', 'pandas', 'matplotlib', 'seaborn', 'Jupyter'],
         'why' => 'It shows I can run a fair model comparison, tune with cross-validation, and explain results to non-specialists.',
@@ -60,9 +62,9 @@ return [
 
     // Optional keys. Remove any you don't need.
     'screenshots' => [
-        'assets/images/projects/learning-base/welcome.png',
-        'assets/images/projects/learning-base/learn-base2.png',
-        'assets/images/projects/learning-base/answer-base10.png',
+        'assets/images/projects/learning-base/home.png',
+        'assets/images/projects/learning-base/choice.png',
+        'assets/images/projects/learning-base/learn.png',
     ],
     'technologies' => ['Kotlin Multiplatform', 'Jetpack Compose', 'Compose Multiplatform', 'Gradle', 'Git', 'Java (original version)'],
     'why' => 'It shows I can take a working program written for one platform and turn it into a shared, multi-platform app with a modern UI. It also shows I can design for learners, not just for correctness.',
@@ -85,14 +87,15 @@ return [
             ],
             [
     'title' => 'Personal Portfolio Website',
-    'image' => 'assets/images/projects/portfolio.png',
+    'image' => 'assets/images/projects/0632FBD4-CD94-4031-9A44-8B29BFFF1305.png',
     'description' => 'My personal portfolio, built with Laravel and Blade. It presents my projects, education, experience and CV, with a snap-scrolling layout, a project catalogue driven by a single config file, and a printable CV page.',
-    'url' => 'https://github.com/stephankenmegnekamdem/your-portfolio-repo',
+    'url' => 'https://github.com/stephankenmegnekamdem/Portfolio',
 
     'screenshots' => [
-        'assets/images/projects/portfolio/home.png',
-        'assets/images/projects/portfolio/projects.png',
-        'assets/images/projects/portfolio/cv.png',
+        'assets/images/projects/portfolio/homepage.png',
+        'assets/images/projects/portfolio/projectspage.png',
+        'assets/images/projects/portfolio/cvpage.png',
+        'assets/images/projects/portfolio/contactpage.png'
     ],
     'technologies' => ['Laravel', 'Blade components', 'Tailwind CSS', 'Vite', 'PHP 8.1', 'Git'],
     'why' => 'It shows I can build and present a real product end to end: layout, content management through config, responsive design and print styling. It is also the place where recruiters see my work first.',
@@ -120,7 +123,7 @@ return [
     'sections' => [
         'personal' => [
                         'title' => 'STEPHAN KENMEGNE KAMDEM',
-                        'icon'  => 'assets/images/projects/personal/icon.png',
+                        'icon'  => 'assets/images/personal/Screenshot 2026-10-20 at 10.57.41.png',
                         'items' => ["Software Engineer student"],
                         'nationality' => [
                                             'label' => 'Cameroon 🇨🇲',
@@ -153,7 +156,7 @@ return [
         'education' => [
             [
                 'title' => 'EPITECH Paris',
-                'icon'  => 'images/icons/education.svg',
+                'icon'  => 'assets/images/icons/images-2.png',
                 'items' => ['Erasmus+ Study Mobility, — University X (2026–2027)'],
                 'descriptions' => [
                             "Discover IT programme (ongoing exchange semester), gaining hands-on experience and",
@@ -169,7 +172,7 @@ return [
 
             [
                 'title' => "Istanbul Nisantasi University",
-                'icon'  => 'images/icons/education.svg',
+                'icon'  => 'assets/images/icons/nisantasi-universitesi-logo-png_seeklogo-383727.png',
                 'items' => ['BSc Software Engineering — University X (2023–2027)'],
                 'descriptions' => ["Main Subjects",
                             "Object-Oriented Programming, Data Structures & Algorithms, Database Management",
@@ -190,8 +193,18 @@ return [
             ],
 
             [
+                'title' => "Istanbul Gelisim University",
+                'icon'  => 'assets/images/icons/igu-logo_190222902d3d4158b2d007e8a89ea53f.png',
+                'items' => ['Turkish Language Preparatory Class — University X (Jan 2023 – Jun 2023)'],
+                'descriptions' => [
+                'Studied Turkish language to develop communication skills and facilitate cultural integration.',
+                'Focused on improving Turkish language proficiency for academic and everyday communication.',
+            ],
+        ],
+
+            [
                 'title' => "MAARIF COLLEGE Ngaoundere\n",
-                'icon'  => 'images/icons/education.svg',
+                'icon'  => 'assets/images/icons/ZCnRBWE5_400x400.jpg',
                 'items' => ['GCE Advanced Level — High School X (2020–2022)'],
                 'descriptions' => ['Took Computer Science, Pure Maths with Mechanics, Physics, Biology, Chemistry.',
                        'Level in EQF: EQF level 4'],
@@ -200,9 +213,14 @@ return [
         ],
         'work' => [
             'title' => 'Work Experience',
-            'icon'  => 'images/icons/work.svg',
+            'icon'  => 'assets/images/icons/work.png',
             'items' => ['Volunteer @ Company DON BOSCO ORATORIO — 2023'],
-            'descriptions' => [''],
+            'descriptions' => [
+                    'Delivered educational support and teaching activities, adapting explanations to students’ learning needs and levels of understanding.',
+                    'Prepared and organized lesson notes and educational materials to facilitate knowledge acquisition and improve learning outcomes.',
+                    'Translated and clarified educational content to bridge language barriers, ensuring accurate interpretation and effective communication.',
+                    'Developed strong communication, organization, adaptability, and problem-solving skills while working in an educational environment.',
+],
         ],
         'projects' => [
         [
@@ -242,7 +260,7 @@ return [
         ],
             [
             'title' => 'Personal Portfolio Website',
-            'icon' => 'assets/images/projects/projects.svg',
+            'icon' => 'assets/images/projects/0632FBD4-CD94-4031-9A44-8B29BFFF1305.png',
             'items' => ['Laravel portfolio site'],
             'descriptions' => [
                 'A personal portfolio built with Laravel and Blade components.',

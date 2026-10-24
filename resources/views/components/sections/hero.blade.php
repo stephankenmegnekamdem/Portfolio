@@ -20,8 +20,8 @@
 
         {{-- Photo, logo and contact links --}}
         <div class="hero-card hero-card--profile">
-            <img src="{{ asset('images/photo.jpg') }}" alt="{{ $name }}" class="hero-photo">
-            <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="hero-logo">
+            <img src="{{ asset('assets/images/personal/me.png') }}" alt="{{ $name }}" class="hero-photo">
+            <img src="{{ asset('assets/images/personal/logo/0632FBD4-CD94-4031-9A44-8B29BFFF1305.png') }}" alt="Logo" class="hero-logo">
 
             <div class="hero-links">
                 @foreach($links as $link)

@@ -1,6 +1,7 @@
-vendor
-node_modules
 .env
+.env.*
 .git
+node_modules
+vendor
 public/build
-storage/logs/*
+storage/logs/*.log

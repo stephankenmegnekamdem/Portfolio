@@ -12,7 +12,7 @@
             <div class="cv-left">
 
                 <div class="profile">
-                    <img src="{{ asset('assets/images/PHOTO-2026-09-28-17-15-02.jpg') }}" alt="Photo of Stephan Kenmegne Kamdem">
+                    <img src="{{ asset('assets/images/cv/Screenshot 2026-10-20 at 10.57.41.png') }}" alt="Photo of Stephan Kenmegne Kamdem">
                 </div>
 
                 <h1 class="name">KENMEGNE KAMDEM STEPHAN</h1>

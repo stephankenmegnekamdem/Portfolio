@@ -7,6 +7,7 @@ import { initPrintButton } from './modules/print-button';
 import { initSideNav } from './modules/side-nav';
 import { initTerminal } from './modules/terminal';
 import { initTypewriter } from './modules/typewriter';
+import { initTheme } from './modules/theme';
 
 initScrollCue();
 initProgressBar();
@@ -17,3 +18,4 @@ initPrintButton();
 initSideNav();
 initTerminal();
 initTypewriter();
+initTheme();

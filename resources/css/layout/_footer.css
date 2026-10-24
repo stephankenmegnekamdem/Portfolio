@@ -1,7 +1,24 @@
-/* ===== FOOTER ===== */
+/* ===== FOOTER =====
+   The footer is always dark blue in both themes, so its text and icons use
+   fixed chrome colours instead of the theme text colours. */
 footer {
     flex-shrink: 0;
     padding: 20px;
     background: linear-gradient(90deg, var(--color-chrome-start), var(--color-chrome-end));
-    border-top: 2px solid var(--color-border);
+    border-top: 2px solid var(--color-chrome-border);
+    color: var(--color-chrome-text);
+}
+
+footer a {
+    color: var(--color-chrome-link);
+}
+
+footer a:hover {
+    color: var(--color-chrome-link-hover);
+}
+
+/* The copyright line uses .my-grey, which the theme changes. Override it here.
+   The more specific selector beats .my-grey's !important. */
+footer .my-grey {
+    color: var(--color-chrome-text) !important;
 }

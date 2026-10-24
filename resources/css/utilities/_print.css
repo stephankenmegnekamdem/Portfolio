@@ -1,13 +1,81 @@
 /* ===== PRINT ===== */
-/* Hide the chrome: nav, footer, and the contact info panel */
+
+/* A4 with a comfortable margin */
+@page {
+    size: A4;
+    margin: 12mm;
+}
+
 @media print {
-    header,
-    footer,
-    aside {
+    /* Print palette: white paper and dark text, whatever the screen theme.
+       Each selector matches one place a theme can be set, so this always wins. */
+    :root,
+    :root[data-theme="dark"],
+    :root[data-theme="light"] {
+        color-scheme: light;
+
+        --color-page-bg: #FFFFFF;
+        --grid-alpha: 0;
+        --scanline-alpha: 0;
+
+        --color-bg: #FFFFFF;
+        --color-bg-rgb: 255 255 255;
+        --color-surface: #FFFFFF;
+        --color-surface-raised: #F1F5F9;
+        --color-tile-start: #DBEAFE;
+
+        --color-text: #0F172A;
+        --color-text-strong: #020617;
+        --color-text-muted: #475569;
+        --color-text-faint: #64748B;
+        --color-placeholder: #64748B;
+
+        --color-accent: #1D4ED8;
+        --color-accent-rgb: 29 78 216;
+        --color-link: #1D4ED8;
+        --color-link-hover: #1E3A8A;
+
+        --color-border: #CBD5E1;
+        --color-border-hover: #94A3B8;
+
+        --color-danger: #B91C1C;
+        --color-success: #15803D;
+        --color-success-rgb: 21 128 61;
+    }
+
+    /* Keep the background colours of boxes when printing */
+    html, body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Let the page grow to fit its content. The base rule sets height: 100%,
+       which is what made the CV overflow out of its boxes. */
+    html,
+    body,
+    body:not(.plain-page) {
+        height: auto !important;
+        background-color: #FFFFFF !important;
+        background-image: none !important;
+    }
+
+    body:not(.plain-page)::after {
         display: none !important;
     }
 
-    /* Let the whole page flow onto paper instead of using snap screens */
+    /* Hide everything that is not part of the paper */
+    header,
+    footer,
+    aside,
+    .scroll-progress,
+    .scroll-cue,
+    .side-nav,
+    .term-line,
+    .footer-terminal {
+        display: none !important;
+    }
+
+    /* Let the snap screens flow onto paper instead of being fixed to the viewport */
     .snap-container,
     .screen,
     .screen-body {
@@ -16,8 +84,21 @@
         scroll-snap-type: none !important;
     }
 
-    .sections {
+    /* Never split a box or a single entry across two pages.
+       Page breaks fall between boxes instead. */
+    .sections,
+    .cv-page .block,
+    .cv-page .entry,
+    .cv-page li {
         break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    /* A heading never sits alone at the bottom of a page */
+    .cv-page h5,
+    .cv-page .entry-head {
+        break-after: avoid;
+        page-break-after: avoid;
     }
 
     /* The CV fills the page width on paper */

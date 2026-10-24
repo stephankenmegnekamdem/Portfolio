@@ -1,13 +1,15 @@
-/* ===== TERMINAL BACKGROUND (all pages except CV and contact) ===== */
+/* ===== PAGE BACKGROUND (home and projects) =====
+   A grid and optional scanlines on the page background.
+   Strength is set by --grid-alpha and --scanline-alpha in _variables.css. */
 body:not(.plain-page) {
-    background-color: var(--color-bg-deep);
+    background-color: var(--color-page-bg);
     background-image:
-        linear-gradient(rgb(var(--color-accent-rgb) / 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgb(var(--color-accent-rgb) / 0.05) 1px, transparent 1px);
+        linear-gradient(rgb(var(--color-accent-rgb) / var(--grid-alpha)) 1px, transparent 1px),
+        linear-gradient(90deg, rgb(var(--color-accent-rgb) / var(--grid-alpha)) 1px, transparent 1px);
     background-size: 32px 32px;
 }
 
-/* Faint scanlines over the whole page */
+/* Faint scanlines over the whole page (invisible when --scanline-alpha is 0) */
 body:not(.plain-page)::after {
     content: "";
     position: fixed;
@@ -16,12 +18,12 @@ body:not(.plain-page)::after {
     z-index: 1;
     background: repeating-linear-gradient(
         to bottom,
-        rgb(var(--color-accent-rgb) / 0.04) 0 1px,
+        rgb(var(--color-accent-rgb) / var(--scanline-alpha)) 0 1px,
         transparent 1px 4px
     );
 }
 
-/* Let the terminal background show through the header and footer bands */
+/* Let the page background show through the header and footer bands */
 body:not(.plain-page) .screen-header,
 body:not(.plain-page) .screen-footer {
     background-color: transparent;
