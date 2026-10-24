@@ -1,4 +1,4 @@
-<footer class="text-center">
+<footer class="text-center" id="footer">
 
     <ul>
         <li><p class="my-grey">© {{ date('Y') }} {{ config('portfolio.name') }}</p></li>

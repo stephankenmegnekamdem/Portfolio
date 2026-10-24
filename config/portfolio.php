@@ -280,12 +280,12 @@ return [
             'descriptions' => [''],
         ],
         'certifications' => [
-                        'images/certs/cert1.png',
-                        'images/certs/cert2.png',
-                        'images/certs/cert3.png',
-                        'images/certs/cert4.png',
-                        'images/certs/cert5.png',
-                        'images/certs/cert6.png',
+                        'assets/images/certs/certs1.png',
+                        'assets/images/certs/certs2.png',
+                        'assets/images/certs/certs3.png',
+                        'assets/images/certs/certs4.png',
+                        'assets/images/certs/certs5.png',
+                        'assets/images/certs/certs6.png',
                     ],
     ],
 ];

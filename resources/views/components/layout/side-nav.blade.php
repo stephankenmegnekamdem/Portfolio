@@ -1,11 +1,13 @@
 @props([
     'sections' => [
+        ['href' => '#header',       'label' => 'go-to-top'],
         ['href' => '#about-me',       'label' => 'About'],
         ['href' => '#education',      'label' => 'Education'],
         ['href' => '#projects',       'label' => 'Projects'],
         ['href' => '#work',           'label' => 'Work'],
         ['href' => '#skills',         'label' => 'Skills'],
         ['href' => '#certifications', 'label' => 'Certifications'],
+        ['href' => '#footer',       'label' => 'go-to-end'],
     ],
 ])
 
