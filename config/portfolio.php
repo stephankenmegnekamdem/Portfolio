@@ -281,6 +281,11 @@ return [
         ],
         'certifications' => [
                         'images/certs/cert1.png',
+                        'images/certs/cert2.png',
+                        'images/certs/cert3.png',
+                        'images/certs/cert4.png',
+                        'images/certs/cert5.png',
+                        'images/certs/cert6.png',
                     ],
     ],
 ];
