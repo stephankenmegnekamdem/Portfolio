@@ -19,7 +19,8 @@ RUN composer dump-autoload --optimize --no-dev
 # available, use php:8.4-apache and make sure it meets composer.json's PHP requirement.
 FROM php:8.5-apache
 RUN docker-php-ext-install bcmath \
-    && a2enmod rewrite
+    && a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork rewrite
 
 # Serve the public/ folder, as Laravel requires
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
