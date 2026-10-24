@@ -51,7 +51,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('contact.send') }}" class="cf-form" novalidate>
+                <form method="POST" action="{{ url('/contact') }}" class="cf-form" novalidate>
                     @csrf
 
                     {{-- Honeypot: hidden from humans --}}
