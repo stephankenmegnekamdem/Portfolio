@@ -5,10 +5,9 @@
 @section('content')
     <div class="cv-page">
 
-
         <div class="detailed-info my-dark">
 
-            <!-- LEFT COLUMN: photo, contact, languages, skills -->
+            <!-- LEFT COLUMN (grey sidebar): photo, name, contact, languages, skills -->
             <div class="cv-left">
 
                 <div class="profile">
@@ -22,8 +21,7 @@
                     <ul class="plain">
                         <li>Neuilly-sur-Marne, 93330, France</li>
                         <li><a href="mailto:{{ config('portfolio.email') }}">{{ config('portfolio.email') }}</a></li>
-                        <li><a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem/">linkedin.com/in/stephan-kenmegne-kamdem</a>
-                        </li>
+                        <li><a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem/">linkedin.com/in/stephan-kenmegne-kamdem</a></li>
                         <li><a href="https://github.com/stephankenmegnekamdem">github.com/stephankenmegnekamdem</a></li>
                     </ul>
                 </section>
@@ -39,7 +37,7 @@
 
                 <section class="block" id="skills">
                     <h5>Technical Skills</h5>
-                    <ul>
+                    <ul class="plain">
                         <li><b>Languages:</b> Java, Python, PHP, JavaScript, C, C++, SQL, HTML, CSS</li>
                         <li><b>Frameworks and tools:</b> Laravel, Git, GitHub, Linux, Microsoft Office</li>
                         <li><b>Web and data:</b> Web development, REST, JSON, relational databases</li>
@@ -48,7 +46,7 @@
 
                 <section class="block">
                     <h5>Soft Skills</h5>
-                    <ul>
+                    <ul class="plain">
                         <li>Initiative</li>
                         <li>Autonomy</li>
                         <li>Leadership</li>
@@ -59,7 +57,7 @@
                 </section>
             </div>
 
-            <!-- RIGHT COLUMN -->
+            <!-- RIGHT COLUMN: about, education, projects, work -->
             <div class="cv-right">
 
                 <section class="block" id="about-me">
@@ -127,25 +125,6 @@
 
                 </section>
 
-                <section class="block" id="work">
-                    <h5>Work Experience</h5>
-                    <div class="entry" id="donbosco">
-                        <div class="entry-head">
-                            <span class="entry-title">Primary School Volunteer Teacher, Don Bosco Oratorio</span>
-                            <span class="entry-date">06/2025 – 08/2026 · Istanbul, Türkiye</span>
-                        </div>
-                        <ul>
-                            <li>Taught mathematics, science and basic computer skills (Word, Excel, PowerPoint) to
-                                students aged 6 to 14, and prepared lessons adapted to each age group
-                            </li>
-                            <li>Acted as English-French interpreter between staff, parents and students, and advised
-                                parents on academic progress
-                            </li>
-                            <li>Organised educational activities and games during summer programmes</li>
-                        </ul>
-                    </div>
-                </section>
-
                 <section class="block" id="projects">
                     <h5>Projects</h5>
 
@@ -161,8 +140,7 @@
 
                     <div class="entry project" id="project2">
                         <div class="entry-head">
-                            <span
-                                class="entry-title">ML Pipeline: California Housing Price Prediction (Team Lead)</span>
+                            <span class="entry-title">ML Pipeline: California Housing Price Prediction (Team Lead)</span>
                             <span class="entry-date">01/2026 – 06/2026</span>
                         </div>
                         <p>End-to-end regression pipeline with a tuned Random Forest model benchmarked against XGBoost.
@@ -179,6 +157,25 @@
                         <p>Base-conversion tool first written in Java, then ported to a Kotlin Multiplatform app with a
                             Jetpack Compose interface.
                             <a href="https://github.com/stephankenmegnekamdem/learningbaseconversions">GitHub</a></p>
+                    </div>
+                </section>
+
+                <section class="block" id="work">
+                    <h5>Work Experience</h5>
+                    <div class="entry" id="donbosco">
+                        <div class="entry-head">
+                            <span class="entry-title">Primary School Volunteer Teacher, Don Bosco Oratorio</span>
+                            <span class="entry-date">06/2025 – 08/2026 · Istanbul, Türkiye</span>
+                        </div>
+                        <ul>
+                            <li>Taught mathematics, science and basic computer skills (Word, Excel, PowerPoint) to
+                                students aged 6 to 14, and prepared lessons adapted to each age group
+                            </li>
+                            <li>Acted as English-French interpreter between staff, parents and students, and advised
+                                parents on academic progress
+                            </li>
+                            <li>Organised educational activities and games during summer programmes</li>
+                        </ul>
                     </div>
                 </section>
 
