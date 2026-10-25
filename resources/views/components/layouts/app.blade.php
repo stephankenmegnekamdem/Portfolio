@@ -6,7 +6,11 @@
 <body>
 
     <main class="snap-container">
-        <x-layout.side-nav fixed />
+        @hasSection('sidenav')
+        @yield('sidenav')
+        @else
+            <x-layout.side-nav fixed />
+         @endif
         <section class="screen screen-header" data-term="@yield('term', './portfolio --start')">
             <x-layout.header>
                 @yield('hero')

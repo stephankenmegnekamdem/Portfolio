@@ -1,5 +1,20 @@
 @extends('components.layouts.app')
 
+@section('sidenav')
+    @php
+        $projectSideLinks = array_merge(
+            [['href' => '#header', 'label' => 'Top']],
+            collect($projects)->map(fn ($p) => [
+                'href'  => '#' . \Illuminate\Support\Str::slug($p['title']),
+                'label' => $p['title'],
+            ])->all(),
+            [['href' => '#footer', 'label' => 'End']]
+        );
+    @endphp
+
+    <x-layout.side-nav fixed :sections="$projectSideLinks" />
+@endsection
+
 @section('term', 'cd projects')
 
 @section('title', 'Projects — ' . config('portfolio.name'))
