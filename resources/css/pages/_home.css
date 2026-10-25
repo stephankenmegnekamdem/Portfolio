@@ -102,3 +102,56 @@
         width: 2px;
     }
 }
+/* ===== PHONE HERO: cards stacked one over the other, full width ===== */
+@media (max-width: 767px) {
+    .home-main {
+        justify-content: flex-start;
+        padding: 16px;
+    }
+
+    .hero-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        max-width: 100%;
+    }
+
+    .hero-grid > .hero-card,
+    .hero-grid > .hero-card--name,
+    .hero-grid > .hero-card--profile {
+        width: 100%;
+        align-self: stretch;
+    }
+
+    .hero-card {
+        padding: 18px;
+    }
+
+    .hero-card--name {
+        padding-top: 20px;
+    }
+
+    .hero-name {
+        font-size: 1.6rem;
+    }
+
+    .hero-tagline {
+        font-size: 0.9rem;
+    }
+
+    /* Profile card sizes to its content, so it is no longer too long */
+    .hero-card--profile {
+        padding: 16px;
+        gap: 12px;
+        min-height: 0;
+    }
+
+    .hero-photo {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-logo {
+        height: 32px;
+    }
+}
