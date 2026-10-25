@@ -35,43 +35,70 @@
     object-fit: contain;
 }
 
+/* ===== PHONE TIMELINE (education, projects, work, skills) ===== */
 @media (max-width: 767px) {
-    /* Hero cards stack, one above the other, full width */
-    .hero-grid {
-        flex-direction: column;
-        gap: 14px;
+    /* Smaller circles and tighter panel, so the title gets the width */
+    .timeline-section {
+        --size: 44px;
+        padding: 14px;
     }
 
-    .hero-grid > .hero-card,
-    .hero-grid > .hero-card--name,
-    .hero-grid > .hero-card--profile {
-        width: 100%;
-        align-self: stretch;
+    .timeline-section h2 {
+        font-size: 1.05rem;
+        margin-bottom: 6px;
     }
 
-    .hero-card {
-        padding: 18px;
+    .timeline-hint {
+        font-size: 0.75rem;
+        margin-bottom: 0.75rem;
     }
 
-    .hero-card--profile {
-        min-height: 50dvh;
-        justify-content: center;
+    .timeline {
+        gap: 0.9rem;
     }
 
-    .hero-card--name {
-        min-height: 26dvh;
+    .node-summary {
+        gap: 0.7rem;
+        align-items: center;
     }
 
-    .hero-name {
-        font-size: 1.6rem;
+    .node-circle {
+        flex-shrink: 0;
     }
 
-    .hero-tagline {
-        font-size: 0.9rem;
+    .node-plus {
+        width: 1.1rem;
+        height: 1.1rem;
+        font-size: 0.8rem;
+        right: -3px;
+        bottom: -3px;
     }
 
-    .hero-photo {
-        width: 200px;
-        height: 200px;
+    /* The "Details" word takes space the title needs. The + badge still shows the circle opens. */
+    .node-hint {
+        display: none;
+    }
+
+    .node-title {
+        flex: 1 1 0;
+        min-width: 0;
+        font-size: 0.92rem;
+        line-height: 1.3;
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .node-body {
+        margin: 0.6rem 0 0 calc(var(--size) + 0.7rem);
+        padding: 0.75rem 0.85rem;
+        font-size: 0.88rem;
+    }
+
+    /* Connector: from the centre of one circle down to the next one */
+    .timeline-node:not(:last-child)::after {
+        left: calc(var(--size) / 2 - 1px);
+        top: var(--size);
+        bottom: -0.9rem;
+        width: 2px;
     }
 }
