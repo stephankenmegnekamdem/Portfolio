@@ -36,7 +36,42 @@
 }
 
 @media (max-width: 767px) {
-    .my-certifications {
+    /* Hero cards stack, one above the other, full width */
+    .hero-grid {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .hero-grid > .hero-card,
+    .hero-grid > .hero-card--name,
+    .hero-grid > .hero-card--profile {
         width: 100%;
+        align-self: stretch;
+    }
+
+    .hero-card {
+        padding: 18px;
+    }
+
+    .hero-card--profile {
+        min-height: 50dvh;
+        justify-content: center;
+    }
+
+    .hero-card--name {
+        min-height: 26dvh;
+    }
+
+    .hero-name {
+        font-size: 1.6rem;
+    }
+
+    .hero-tagline {
+        font-size: 0.9rem;
+    }
+
+    .hero-photo {
+        width: 200px;
+        height: 200px;
     }
 }

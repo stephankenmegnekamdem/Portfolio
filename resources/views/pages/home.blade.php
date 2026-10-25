@@ -48,7 +48,7 @@
     @php $section = $sections['personal']; @endphp
 
     <section class="screen" id="about-me">
-        <x-layout.side-nav />
+
         <div class="screen-body">
 
             <div class="personal-layout">
@@ -130,7 +130,7 @@
 {{-- Screen 2: education --}}
 @if(!empty($educationNodes))
     <section class="screen" id="education">
-        <x-layout.side-nav />
+
         <div class="screen-body">
             <x-sections.timeline title="Education" :nodes="$educationNodes" />
         </div>
@@ -140,7 +140,7 @@
 {{-- Screen 3: projects --}}
 @if(!empty($projectNodes))
     <section class="screen">
-        <x-layout.side-nav />
+
         <div class="screen-body" id="projects">
             <x-sections.timeline title="Projects" :nodes="$projectNodes" />
         </div>
@@ -150,7 +150,7 @@
 {{-- Screen 4: work experience --}}
 @if(!empty($workNodes))
     <section class="screen">
-        <x-layout.side-nav />
+
         <div class="screen-body" id="work">
             <x-sections.timeline title="Work Experience" :nodes="$workNodes" />
         </div>
@@ -160,7 +160,7 @@
 {{-- Screen 5: skills --}}
 @if(!empty($skillNodes))
     <section class="screen">
-        <x-layout.side-nav />
+
         <div class="screen-body" id="skills">
             <x-sections.timeline title="Skills" :nodes="$skillNodes" />
         </div>
@@ -171,7 +171,7 @@
 @if(!empty($certs))
     <section class="screen">
         <div class="screen-body">
-            <x-layout.side-nav />
+
             <section class="sections" id="certifications">
                 <h2 class="my-black">Certifications</h2>
                 @foreach($certs as $cert)

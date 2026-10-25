@@ -1,84 +1,116 @@
 import { reduceMotion, snapContainer } from '../lib/dom';
 
-/* The section menus on the home page. Each screen has its own copy of the menu.
-   One listener on the document handles closing for all of them. */
+/* One fixed section menu for the whole site.
+   On desktop the page scrolls inside .snap-container.
+   On phones the window scrolls. This file handles both. */
 export function initSideNav() {
-    const navs = document.querySelectorAll('.side-nav');
-    if (!navs.length) return;
+    const nav = document.querySelector('.side-nav--fixed');
+    if (!nav) return;
 
+    const toggle = nav.querySelector('.side-nav-toggle');
+    const panel = nav.querySelector('.side-nav-panel');
+    const links = panel.querySelectorAll('a[href^="#"]');
     const container = snapContainer();
     const reduce = reduceMotion();
 
-    const setOpen = (nav, open) => {
-        nav.classList.toggle('is-open', open);
-        nav.querySelector('.side-nav-toggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+    // The element that actually scrolls: the snap container on desktop, the window on phones
+    const scroller = () => {
+        if (container && container.scrollHeight > container.clientHeight + 1) {
+            return container;
+        }
+        return window;
     };
 
-    navs.forEach((nav) => {
-        const toggle = nav.querySelector('.side-nav-toggle');
-        const panel = nav.querySelector('.side-nav-panel');
-        if (!toggle || !panel) return;
+    const scrollTopOf = (s) => (s === window ? window.scrollY : s.scrollTop);
 
-        const screen = nav.closest('.screen');
-        const links = panel.querySelectorAll('a[href^="#"]');
+    // Distance from the top of the scrollable content to an element
+    const offsetOf = (el, s) => {
+        if (s === window) {
+            return el.getBoundingClientRect().top + window.scrollY;
+        }
+        return el.getBoundingClientRect().top - s.getBoundingClientRect().top + s.scrollTop;
+    };
 
-        // Open or close. stopPropagation stops the document listener closing it straight away.
-        toggle.addEventListener('click', (event) => {
-            event.stopPropagation();
-            setOpen(nav, !nav.classList.contains('is-open'));
+    const setOpen = (open) => {
+        nav.classList.toggle('is-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    toggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setOpen(!nav.classList.contains('is-open'));
+    });
+
+    links.forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const id = link.getAttribute('href').slice(1);
+            const s = scroller();
+            const target = id === 'header' ? null : document.getElementById(id);
+
+            if (id !== 'header' && !target) return;
+
+            event.preventDefault();
+            setOpen(false);
+
+            const top = target ? offsetOf(target, s) : 0;
+            if (s === window) {
+                window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+            } else {
+                s.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' });
+            }
+            history.replaceState(null, '', '#' + id);
+        });
+    });
+
+    // Show the menu once the hero screen has been left
+    const onScroll = () => {
+        const past = scrollTopOf(scroller()) > window.innerHeight * 0.6;
+        document.body.classList.toggle('is-scrolled', past);
+    };
+
+    // Underline the section currently on screen
+    const sectionIds = [...links]
+        .map((link) => link.getAttribute('href').slice(1))
+        .filter((id) => id !== 'header');
+
+    const markActive = () => {
+        let current = null;
+        sectionIds.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el && el.getBoundingClientRect().top <= window.innerHeight * 0.4) {
+                current = id;
+            }
         });
 
-        // Scroll to the chosen section and close the menu
         links.forEach((link) => {
-            link.addEventListener('click', (event) => {
-                const id = link.getAttribute('href').slice(1);
-                const target = document.getElementById(id);
-                if (!target || !container) return;
-
-                event.preventDefault();
-                setOpen(nav, false);
-
-                const screenEl = target.closest('.screen') || target;
-                const offset = screenEl.getBoundingClientRect().top
-                             - container.getBoundingClientRect().top;
-
-                container.scrollTo({
-                    top: container.scrollTop + offset,
-                    behavior: reduce ? 'auto' : 'smooth',
-                });
-
-                history.replaceState(null, '', '#' + id);
-            });
+            const id = link.getAttribute('href').slice(1);
+            const active = id === current;
+            link.classList.toggle('is-active', active);
+            if (active) {
+                link.setAttribute('aria-current', 'true');
+            } else {
+                link.removeAttribute('aria-current');
+            }
         });
+    };
 
-        // Highlight the link for the section that belongs to this screen
-        if (screen) {
-            let activeId = null;
-            links.forEach((link) => {
-                const id = link.getAttribute('href').slice(1);
-                const target = document.getElementById(id);
-                if (!activeId && target && screen.contains(target)) {
-                    activeId = id;
-                }
-            });
+    const onAnyScroll = () => {
+        onScroll();
+        markActive();
+    };
 
-            links.forEach((link) => {
-                link.classList.toggle('is-active', link.getAttribute('href') === '#' + activeId);
-            });
-        }
-    });
+    // Listen to both, because only one of them scrolls on any given screen size
+    window.addEventListener('scroll', onAnyScroll, { passive: true });
+    if (container) {
+        container.addEventListener('scroll', onAnyScroll, { passive: true });
+    }
+    onAnyScroll();
 
-    // Clicking outside a menu closes it
+    // Clicking outside, or pressing Escape, closes the menu
     document.addEventListener('click', (event) => {
-        navs.forEach((nav) => {
-            if (!nav.contains(event.target)) setOpen(nav, false);
-        });
+        if (!nav.contains(event.target)) setOpen(false);
     });
-
-    // Escape closes all menus
     document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            navs.forEach((nav) => setOpen(nav, false));
-        }
+        if (event.key === 'Escape') setOpen(false);
     });
 }

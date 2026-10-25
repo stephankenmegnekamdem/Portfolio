@@ -69,3 +69,72 @@
     font-weight: 700;
     border-bottom-color: var(--color-accent);
 }
+/* ===== FIXED SIDE NAV (follows the page while scrolling) ===== */
+.side-nav--fixed {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 40;
+}
+
+/* Hidden on the hero screen until the visitor scrolls past it */
+.side-nav--fixed {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+body.is-scrolled .side-nav--fixed {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Current section in the side menu: underlined in the highlight colour */
+.side-nav-panel a.is-active {
+    color: var(--color-white);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-highlight);
+    text-underline-offset: 6px;
+}
+/* ===== SIDE NAV: fixed colours, readable on light and dark ===== */
+.side-nav-toggle {
+    background-color: var(--color-chrome-start);
+    color: var(--color-white);
+    border-color: var(--color-chrome-border);
+}
+
+.side-nav-toggle:hover,
+.side-nav-toggle:focus-visible {
+    color: var(--color-white);
+    border-color: var(--color-highlight);
+}
+
+.side-nav-panel {
+    background-color: var(--color-chrome-start);
+    border-color: var(--color-chrome-border);
+}
+
+.side-nav-panel a {
+    color: var(--color-nav-text);
+}
+
+.side-nav-panel a:hover {
+    color: var(--color-white);
+}
+
+.side-nav-panel a.is-active {
+    color: var(--color-white);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-highlight);
+    text-underline-offset: 6px;
+    border-bottom-color: transparent;
+}
+/* Phones: the footer is hidden, so the "End" link is removed */
+@media (max-width: 767px) {
+    .side-nav-panel a[href="#footer"] {
+        display: none;
+    }
+}

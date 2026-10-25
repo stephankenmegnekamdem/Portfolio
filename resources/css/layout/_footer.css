@@ -22,3 +22,12 @@ footer a:hover {
 footer .my-grey {
     color: var(--color-chrome-text) !important;
 }
+
+/* Phones: no footer band. The social links and closing line are hidden. */
+@media (max-width: 767px) {
+    .screen-footer,
+    footer,
+    .footer {
+        display: none !important;
+    }
+}

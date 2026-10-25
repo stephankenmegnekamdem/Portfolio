@@ -140,9 +140,33 @@
    That has no effect on a grid, so it was removed. The phone layout is still a
    two-column grid, exactly as before. Making it a single column is a visual
    change, so it needs your approval first. */
-@media (max-width: 767px) {
-    .cv-page .cv-left,
-    .cv-page .cv-right {
+/* Phones only: one column, sidebar first, then the main content.
+   "screen" keeps this from applying when printing from a phone,
+   so the print layout stays two columns. */
+@media screen and (max-width: 767px) {
+    .cv-page .detailed-info {
+        grid-template-columns: 1fr;
+        padding: 8px;
+    }
+
+    .cv-page .profile {
         width: 100%;
+        justify-content: center;
+    }
+
+    /* Slightly larger text on phones, where 11px is hard to read */
+    .cv-page p,
+    .cv-page ul,
+    .cv-page .entry-date,
+    .cv-page .entry-sub {
+        font-size: 13px;
+    }
+
+    .cv-page h5 {
+        font-size: 13px;
+    }
+
+    .cv-page .name {
+        font-size: 17px;
     }
 }

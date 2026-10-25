@@ -7,56 +7,22 @@
 }
 
 @media print {
-    /* Print palette: white paper and dark text, whatever the screen theme.
-       Each selector matches one place a theme can be set, so this always wins. */
-    :root,
-    :root[data-theme="dark"],
-    :root[data-theme="light"] {
-        color-scheme: light;
-
-        --color-page-bg: #FFFFFF;
-        --grid-alpha: 0;
-        --scanline-alpha: 0;
-
-        --color-bg: #FFFFFF;
-        --color-bg-rgb: 255 255 255;
-        --color-surface: #FFFFFF;
-        --color-surface-raised: #F1F5F9;
-        --color-tile-start: #DBEAFE;
-
-        --color-text: #0F172A;
-        --color-text-strong: #020617;
-        --color-text-muted: #475569;
-        --color-text-faint: #64748B;
-        --color-placeholder: #64748B;
-
-        --color-accent: #1D4ED8;
-        --color-accent-rgb: 29 78 216;
-        --color-link: #1D4ED8;
-        --color-link-hover: #1E3A8A;
-
-        --color-border: #CBD5E1;
-        --color-border-hover: #94A3B8;
-
-        --color-danger: #B91C1C;
-        --color-success: #15803D;
-        --color-success-rgb: 21 128 61;
-    }
-
-    /* Keep the background colours of boxes when printing */
-    html, body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-
-    /* Let the page grow to fit its content. The base rule sets height: 100%,
-       which is what made the CV overflow out of its boxes. */
+    /* Keep the colours of the theme on screen, so the paper matches it.
+       Only the page background is set to white, so text and boxes keep their colours. */
     html,
     body,
     body:not(.plain-page) {
         height: auto !important;
-        background-color: #FFFFFF !important;
+        background-color: var(--color-page-bg) !important;
         background-image: none !important;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Print the boxes and backgrounds exactly as they look on screen */
+    html, body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
     }
 
     body:not(.plain-page)::after {
@@ -70,6 +36,7 @@
     .scroll-progress,
     .scroll-cue,
     .side-nav,
+    .side-nav--fixed,
     .term-line,
     .footer-terminal {
         display: none !important;
@@ -84,27 +51,38 @@
         scroll-snap-type: none !important;
     }
 
-    /* Never split a box or a single entry across two pages.
-       Page breaks fall between boxes instead. */
-    .sections,
-    .cv-page .block,
+    /* The CV fills the page width on paper */
+    .cv-page .detailed-info {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Never split a single entry or list item across two pages */
     .cv-page .entry,
     .cv-page li {
         break-inside: avoid;
         page-break-inside: avoid;
     }
 
-    /* A heading never sits alone at the bottom of a page */
+    /* Headings stay with the text under them */
     .cv-page h5,
     .cv-page .entry-head {
         break-after: avoid;
         page-break-after: avoid;
     }
+}
 
-    /* The CV fills the page width on paper */
-    .cv-page .detailed-info {
-        max-width: none;
-        margin: 0;
-        padding: 0;
+/* Printing from a phone: use the A4 width, not the screen width */
+@media print {
+    html, body {
+        width: 210mm;
+        max-width: 210mm;
+    }
+
+    .cv-page,
+    .cv-page * {
+        max-width: 100% !important;
+        box-sizing: border-box;
     }
 }

@@ -1,6 +1,6 @@
 /* ===== PAGE BACKGROUND (home and projects) =====
-   A grid and optional scanlines on the page background.
-   Strength is set by --grid-alpha and --scanline-alpha in _variables.css. */
+   Dark theme: solid colour with a faint grid.
+   Light theme: solid colour only. */
 body:not(.plain-page) {
     background-color: var(--color-page-bg);
     background-image:
@@ -9,7 +9,12 @@ body:not(.plain-page) {
     background-size: 32px 32px;
 }
 
-/* Faint scanlines over the whole page (invisible when --scanline-alpha is 0) */
+/* Light theme: remove the grid */
+:root[data-theme="light"] body:not(.plain-page) {
+    background-image: none;
+}
+
+/* Scanlines: dark theme only */
 body:not(.plain-page)::after {
     content: "";
     position: fixed;
@@ -23,8 +28,18 @@ body:not(.plain-page)::after {
     );
 }
 
+:root[data-theme="light"] body:not(.plain-page)::after {
+    display: none;
+}
+
 /* Let the page background show through the header and footer bands */
 body:not(.plain-page) .screen-header,
 body:not(.plain-page) .screen-footer {
     background-color: transparent;
+}
+/* Phones: finer grid so it reads as a subtle texture, not large squares */
+@media (max-width: 767px) {
+    body:not(.plain-page) {
+        background-size: 20px 20px;
+    }
 }

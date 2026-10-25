@@ -15,8 +15,7 @@ header {
     border-bottom: 2px solid var(--color-chrome-border);
 }
 
-/* Nav links: muted by default, highlighted for the current page.
-   These rules replace the inline styles that used to be in header.blade.php. */
+/* Nav links: muted by default, highlighted for the current page */
 .nav-link {
     color: var(--color-nav-text);
     font-weight: 400;
@@ -39,6 +38,17 @@ header {
     text-underline-offset: 6px;
 }
 
+/* Desktop: the menu button is hidden, the links show */
+.nav-menu {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 /* ===== THEME TOGGLE (right end of the nav) ===== */
 .theme-toggle {
     display: inline-flex;
@@ -51,6 +61,7 @@ header {
     border-radius: 999px;
     font: inherit;
     font-size: 0.85rem;
+    white-space: nowrap;
     cursor: pointer;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -62,8 +73,104 @@ header {
     outline: none;
 }
 
+/* ===== PHONE NAV: menu button on the left, links in a dropdown ===== */
 @media (max-width: 767px) {
-    .theme-toggle-label {
-        display: none;      /* icon only on phones, to keep the nav on one line */
+    .nav {
+        height: auto;
+        min-height: 52px;
     }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-menu {
+        display: block;
+        position: relative;
+    }
+
+    .nav-menu-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        list-style: none;
+        cursor: pointer;
+        color: var(--color-white);
+        background: rgb(255 255 255 / 0.08);
+        border: 1px solid rgb(255 255 255 / 0.25);
+        border-radius: 999px;
+        font-size: 0.9rem;
+        user-select: none;
+    }
+
+    .nav-menu-button::-webkit-details-marker {
+        display: none;
+    }
+
+    .nav-menu-panel {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        z-index: 30;
+        min-width: 180px;
+        display: flex;
+        flex-direction: column;
+        padding: 6px;
+        background: var(--color-chrome-start);
+        border: 1px solid var(--color-chrome-border);
+        border-radius: var(--radius-sm);
+        box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+    }
+
+    .nav-menu-item {
+        display: block;
+        padding: 10px 12px;
+        width: 100%;
+        background: none;
+        border: 0;
+        border-radius: 6px;
+        color: var(--color-nav-text);
+        font: inherit;
+        font-size: 0.95rem;
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .nav-menu-item:hover,
+    .nav-menu-item:focus-visible {
+        background: rgb(255 255 255 / 0.1);
+        color: var(--color-white);
+        text-decoration: none;
+        outline: none;
+    }
+
+    .nav-menu-item.is-active {
+        color: var(--color-white);
+        font-weight: 700;
+        box-shadow: inset 3px 0 0 var(--color-highlight);
+    }
+}
+
+/* CV print button: uses the header colours, so it stays readable in both themes */
+.cv-print-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: var(--color-nav-text);
+    font: inherit;
+    cursor: pointer;
+}
+
+.cv-print-button:hover,
+.cv-print-button:focus-visible {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-decoration-color: var(--color-highlight);
+    text-underline-offset: 6px;
+    outline: none;
 }
