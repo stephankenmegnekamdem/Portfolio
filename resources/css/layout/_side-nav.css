@@ -132,9 +132,26 @@ body.is-scrolled .side-nav--fixed {
     text-underline-offset: 6px;
     border-bottom-color: transparent;
 }
-/* Phones: the footer is hidden, so the "End" link is removed */
+/* ===== FIXED MENU POSITION: start near the top, never cut off ===== */
+.side-nav--fixed {
+    top: 84px;                   /* below the nav bar */
+    transform: none;
+}
+
+.side-nav--fixed .side-nav-panel {
+    top: 0;
+    max-height: calc(100dvh - 110px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+/* Phones: the nav bar is taller, so start a little lower */
 @media (max-width: 767px) {
-    .side-nav-panel a[href="#footer"] {
-        display: none;
+    .side-nav--fixed {
+        top: 96px;
+    }
+
+    .side-nav--fixed .side-nav-panel {
+        max-height: calc(100dvh - 130px);
     }
 }
