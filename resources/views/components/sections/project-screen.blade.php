@@ -35,7 +35,7 @@
         </div>
 
         {{-- Zigzag dropdowns --}}
-        <div class="zigzag" data-no-reveal>
+        <div class="zigzag" data-no-reveal data-no-type>
             @foreach($sections as $s)
                 @if(!empty($s['value']))
                     <details class="accordion-item">

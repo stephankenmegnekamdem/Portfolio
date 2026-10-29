@@ -12,11 +12,11 @@
 }
 
 .hero-grid {
-    width: 100%;
-    max-width: 960px;
+    width: min(92vw, 110vmin);
+    max-width: none;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: clamp(16px, 3vmin, 36px);
 }
 
 .hero-grid > .hero-card {
@@ -37,7 +37,7 @@
     background: linear-gradient(160deg, var(--color-surface) 70%, var(--color-tile-start) 0%);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
-    padding: 40px;
+        padding: clamp(24px, 4vmin, 56px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -51,8 +51,8 @@
 .hero-card--profile {
     align-items: center;
     justify-content: center;
-    gap: 20px;
-    padding: 32px;
+    gap: clamp(12px, 2.5vmin, 28px);
+    padding: clamp(24px, 4vmin, 56px);
 }
 
 .hero-eyebrow {
@@ -65,7 +65,7 @@
 
 .hero-name {
     color: var(--color-accent);
-    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 4vw, 3rem);
     font-weight: 700;
     line-height: 1.15;
     margin: 0 0 12px;
@@ -78,8 +78,8 @@
 }
 
 .hero-photo {
-    width: 240px;
-    height: 240px;
+    width: var(--photo-size);
+    height: var(--photo-size);
     object-fit: cover;
     border-radius: 50%;
     border: 3px solid var(--color-border);

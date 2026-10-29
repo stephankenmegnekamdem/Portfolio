@@ -1,20 +1,17 @@
 <script>
-    // Set the theme before the page paints, so there is no flash of the wrong colours.
-    // Saved choice first; if there is none, follow the operating system setting.
     (function () {
         var choice = null;
         try {
-            choice = localStorage.getItem('theme');
+            var saved = sessionStorage.getItem('theme-choice');
+            if (saved === 'light' || saved === 'dark') choice = saved;
         } catch (e) {
-            // Storage blocked (private mode, some browsers). Use the system setting.
+            // storage blocked: use the computer's setting
         }
-
-        if (choice !== 'light' && choice !== 'dark') {
-            var systemLight = window.matchMedia &&
-                window.matchMedia('(prefers-color-scheme: light)').matches;
-            choice = systemLight ? 'light' : 'dark';
+        if (!choice) {
+            choice = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'light'
+                : 'dark';
         }
-
         document.documentElement.setAttribute('data-theme', choice);
     })();
 </script>

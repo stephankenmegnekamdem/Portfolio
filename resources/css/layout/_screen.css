@@ -1,33 +1,36 @@
-/* ===== PAGE FRAME: SNAP SCROLL AND SCREENS ===== */
+/* ===== PAGE FRAME: ONE CONTINUOUS PAGE ===== */
+/* CV and contact pages: plain documents, no snapping at all */
+html:has(body.plain-page),
+body.plain-page {
+    scroll-snap-type: none !important;
+}
+/* Keep the bottom of the page clear of the status bar */
+
 .snap-container {
-    height: 100vh;
-    height: 100dvh;               /* correct height on phones with moving browser bars */
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+    height: auto;
+    overflow: visible;
 }
 
-/* Each screen fills the viewport */
 .screen {
-    height: 100vh;
-    height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;     /* don't skip past a screen in one flick */
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;             /* the inner body scrolls instead */
+    overflow: visible;
     box-sizing: border-box;
     position: relative;
 }
 
-/* Scrollable inner area of a screen */
+/* Content is padded and centred with fluid spacing, capped on large monitors */
 .screen-body {
-    flex: 1;
-    min-height: 0;                /* lets flex children shrink and scroll */
-    overflow-y: auto;
-    overscroll-behavior: contain;
+    flex: 1 0 auto;
+    min-height: 0;
+    overflow: visible;
     padding: var(--space-screen);
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -35,38 +38,42 @@
 .screen-footer {
     background-color: var(--color-bg);
 }
-
-/* Keep content clear of the side nav tab on home screens */
-.screen:has(.side-nav) .screen-body {
-    padding-left: 48px;
+/* Footer: a compact band at the bottom, not a full screen */
+.screen-footer {
+    min-height: auto;
 }
 
-/* ===== PHONE: NORMAL ONE-FINGER SCROLLING =====
-   No snapping, and the page scrolls as one document.
-   Each screen grows to fit its content instead of being fixed to the viewport. */
+.screen-footer .screen-body {
+    padding: calc(var(--space-screen) / 2) var(--space-screen);
+}
+
+/* ===== GENTLE SNAP TO SECTIONS =====
+   Phones: CSS snapping (works well with touch).
+   Desktop: handled by page-snap.js. */
+.screen,
+.screen-header {
+    scroll-snap-align: start;
+}
+
 @media (max-width: 767px) {
-    .snap-container {
-        height: auto;
-        overflow: visible;
+    html {
+        scroll-snap-type: y proximity;
+    }
+}
+
+@media (min-width: 768px) {
+    html {
         scroll-snap-type: none;
     }
+}
 
-    .screen {
-        height: auto;
-        min-height: 100dvh;
-        overflow: visible;
-        scroll-snap-align: none;
-        scroll-snap-stop: normal;
-    }
-
-    .screen-body {
-        overflow: visible;
-        flex: none;
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-snap-type: none;
     }
 }
 
-@media (min-width: 1280px) {
-    .screen-body {
-        padding: var(--space-screen-desktop);
-    }
+/* The footer is never a snap point, on phones or desktop */
+.screen-footer {
+    scroll-snap-align: none;
 }

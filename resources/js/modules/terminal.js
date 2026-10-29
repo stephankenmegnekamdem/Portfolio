@@ -1,31 +1,80 @@
 import { makeCursor, typeInto } from '../lib/typing';
 import { reduceMotion, snapContainer } from '../lib/dom';
 
-const PIXEL_BLOCK = 6; // size of each pixel in screen px. Lower = finer pixels
-const PIXEL_HOLD_MS = 900;
-const LINE_HOLD_MS = 1600;
-const FADE_MS = 500;
+const TYPE_SPEED = 35;   // ms per character
+const HOLD_MS = 1600;    // how long a finished command stays visible
 
-/* Shows a command in the corner of a screen (or page), types it, then fades it out. */
-function showCommand(host, text, fixed) {
-    host.querySelectorAll('.term-line').forEach((old) => old.remove());
+const lines = new Set(); // every command line on the page
 
-    const line = document.createElement('div');
-    line.className = 'term-line' + (fixed ? ' term-line--fixed' : '');
+/* Creates a command line. Each line keeps its own timers. */
+function makeLine(className, parent, prepend) {
+    const el = document.createElement('div');
+    el.className = className;
+    el.setAttribute('aria-hidden', 'true');
 
     const out = document.createElement('span');
-    line.appendChild(out);
-    line.appendChild(makeCursor());
-    host.appendChild(line);
+    el.appendChild(out);
+    el.appendChild(makeCursor());
 
-    requestAnimationFrame(() => line.classList.add('is-on'));
+    if (prepend) parent.prepend(el);
+    else parent.appendChild(el);
 
-    typeInto(out, text, 35, () => {
-        setTimeout(() => {
-            line.classList.remove('is-on');
-            setTimeout(() => line.remove(), FADE_MS);
-        }, LINE_HOLD_MS);
+    const line = { el, out, timer: null, runId: 0, shown: '' };
+    lines.add(line);
+    return line;
+}
+
+/* Stops and hides one line immediately. */
+function hide(line) {
+    clearTimeout(line.timer);
+    line.runId++;
+    line.el.classList.remove('is-on');
+    line.shown = '';
+}
+
+/* Hides every line except the one given, so two commands are never visible together. */
+function hideOthers(keep) {
+    lines.forEach((line) => {
+        if (line !== keep) hide(line);
     });
+}
+
+/* Types a command, holds it, then fades it out. */
+function play(line, text) {
+    hideOthers(line);
+
+    line.shown = text;
+    const id = ++line.runId;
+    clearTimeout(line.timer);
+    line.el.classList.add('is-on');
+
+    const fade = () => line.el.classList.remove('is-on');
+
+    if (reduceMotion()) {
+        line.out.textContent = text;
+        line.timer = setTimeout(fade, HOLD_MS);
+        return;
+    }
+
+    line.out.textContent = '';
+    let i = 0;
+    const step = () => {
+        if (id !== line.runId) return;
+        line.out.textContent = text.slice(0, ++i);
+        if (i < text.length) {
+            line.timer = setTimeout(step, TYPE_SPEED);
+        } else {
+            line.timer = setTimeout(fade, HOLD_MS);
+        }
+    };
+    line.timer = setTimeout(step, TYPE_SPEED);
+}
+
+/* Places the fixed line just below the header bar. */
+function placeFixedLine() {
+    const nav = document.querySelector('.nav');
+    const top = nav ? nav.getBoundingClientRect().bottom + 10 : 64;
+    document.documentElement.style.setProperty('--term-top', top + 'px');
 }
 
 /* The command shown for a screen. Uses data-term if set, otherwise the element's id or heading. */
@@ -43,104 +92,101 @@ function labelFor(screen) {
     return '$ cd /' + (screen.dataset.name || 'section');
 }
 
-/* Shrinks an image into tiny blocks, then restores it: a pixelated reveal. */
-function pixelate(img) {
-    if (reduceMotion() || !img.complete || !img.naturalWidth || img.dataset.pixelBusy) return;
-
-    const displayW = img.clientWidth;
-    if (!displayW) return;
-
-    const smallW = Math.max(4, Math.round(displayW / PIXEL_BLOCK));
-    const smallH = Math.max(4, Math.round(smallW * img.naturalHeight / img.naturalWidth));
-
-    const canvas = document.createElement('canvas');
-    canvas.width = smallW;
-    canvas.height = smallH;
-
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-
-    let url;
-    try {
-        ctx.drawImage(img, 0, 0, smallW, smallH);
-        url = canvas.toDataURL('image/png');
-    } catch (e) {
-        return; // cross-origin images can't be read, so skip them
-    }
-
-    const original = img.getAttribute('src');
-    img.dataset.pixelBusy = '1';
-    img.classList.add('is-pixelated');
-    img.src = url;
-
-    setTimeout(() => {
-        img.src = original;
-        img.classList.remove('is-pixelated');
-        delete img.dataset.pixelBusy;
-    }, PIXEL_HOLD_MS);
-}
-
-function pixelateScreen(screen) {
-    screen.querySelectorAll('img').forEach((img) => {
-        if (img.naturalWidth > 120) pixelate(img); // skip icons and logos
-    });
-}
-
-/* Footer message: types out when the footer scrolls into view. */
-function initFooterMessage(container) {
+/* End-of-page message: a bar at the top of the footer, like the section bars.
+   It types out when the footer comes into view and then stays. */
+function initFooterMessage() {
     const footer = document.querySelector('.screen-footer');
-    const footerBody = footer ? footer.querySelector('.screen-body') : null;
+    const body = footer ? footer.querySelector('.screen-body') : null;
 
-    if (!footer || !footerBody || footerBody.textContent.trim() !== '') return;
+    if (!footer || !body || body.querySelector('.term-bar--end')) return;
 
-    const out = document.createElement('div');
-    out.className = 'footer-terminal';
+    const bar = document.createElement('div');
+    bar.className = 'term-bar term-bar--end';
+    bar.setAttribute('aria-hidden', 'true');
 
     const text = document.createElement('span');
-    out.appendChild(text);
-    out.appendChild(makeCursor());
-    footerBody.appendChild(out);
+    bar.appendChild(text);
+    bar.appendChild(makeCursor());
+    body.prepend(bar);
 
     const message = '> thanks for visiting\n> end of page';
 
     const observer = new IntersectionObserver((entries, obs) => {
         if (entries[0].isIntersecting) {
-            typeInto(text, message, 50);
+            typeInto(text, message, 50, () => bar.classList.add('is-done'));
             obs.disconnect();
         }
-    }, { root: container, threshold: 0.5 });
+    }, { threshold: 0.5 });
 
+    // Show the bar at once, so its space is reserved and the text types into it
+    bar.classList.add('is-on');
     observer.observe(footer);
 }
 
 export function initTerminal() {
-    const container = snapContainer();
+    // The hero and the plain pages use one line fixed under the header
+    const fixed = makeLine('term-line', document.body, false);
+    placeFixedLine();
+    window.addEventListener('resize', placeFixedLine);
 
-    // Pages without snap screens (CV, contact): one command line at the top
-    if (!container) {
+    // Plain pages (CV, contact): show the page path once
+    if (!snapContainer()) {
         const path = location.pathname.replace(/\/$/, '') || '/home';
-        const host = document.querySelector('main') || document.body;
-        showCommand(host, '$ cd ' + path, true);
+        play(fixed, '$ cd ' + path);
         return;
     }
 
-    // Each screen types its command and pixelates its images when it comes into view.
-    // The `current` check stops a screen re-typing while it stays visible.
-    let current = null;
+    const hero = document.querySelector('.screen-header');
+    const sections = [...document.querySelectorAll('.screen:not(.screen-footer)')];
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (!entry.isIntersecting || entry.target === current) return;
-
-            current = entry.target;
-            showCommand(current, labelFor(current), false);
-            pixelateScreen(current);
-        });
-    }, { root: container, threshold: 0.6 });
-
-    document.querySelectorAll('.screen:not(.screen-footer)').forEach((screen) => {
-        observer.observe(screen);
+    // Each section has its own bar at its top. The hero uses the fixed line.
+    const bars = new Map();
+    sections.forEach((screen) => {
+        if (screen === hero) {
+            bars.set(screen, fixed);
+            return;
+        }
+        const host = screen.querySelector('.screen-body') || screen;
+        bars.set(screen, makeLine('term-bar', host, true));
     });
 
-    initFooterMessage(container);
+    let current = null;
+    let queued = false;
+
+    const atBottom = () =>
+        window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 4;
+
+    // The current section is the last one whose top has passed the upper part of the screen.
+    // At the bottom of the page, the last section is current, even if it is taller than the screen.
+    const update = () => {
+        queued = false;
+
+        const line = window.innerHeight * 0.4;
+        let next = null;
+
+        if (atBottom()) {
+            next = sections[sections.length - 1] || null;
+        } else {
+            sections.forEach((screen) => {
+                if (screen.getBoundingClientRect().top <= line) next = screen;
+            });
+        }
+
+        if (!next || next === current) return;
+
+        current = next;
+        play(bars.get(next), labelFor(next));
+    };
+
+    const schedule = () => {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    update();
+
+    initFooterMessage();
 }

@@ -39,7 +39,6 @@
 @media (max-width: 767px) {
     /* Smaller circles and tighter panel, so the title gets the width */
     .timeline-section {
-        --size: 44px;
         padding: 14px;
     }
 
@@ -101,9 +100,8 @@
         bottom: -0.9rem;
         width: 2px;
     }
-}
-/* ===== PHONE HERO: cards stacked one over the other, full width ===== */
-@media (max-width: 767px) {
+
+    /* ===== PHONE HERO: cards stacked one over the other, full width ===== */
     .home-main {
         justify-content: flex-start;
         padding: 16px;

@@ -1,20 +1,16 @@
-<footer class="text-center" id="footer">
+<footer class="site-footer">
 
-    <ul>
-        <li><p class="my-grey">© {{ date('Y') }} {{ config('portfolio.name') }}</p></li>
+    <div class="site-footer-copy">© {{ date('Y') }} {{ config('portfolio.name') }}</div>
 
-        <li>
-            <x-ui.social-links :links="[
-                ['href' => config('portfolio.github'), 'icon' => 'fa-brands fa-github', 'label' => 'GitHub'],
-                ['href' => 'https://www.linkedin.com/in/stephan-kenmegne-kamdem/', 'icon' => 'fa-brands fa-linkedin', 'label' => 'LinkedIn'],
-            ]" />
-        </li>
+    <div class="site-footer-links">
+        <x-ui.social-links :links="[
+            ['href' => config('portfolio.github'), 'icon' => 'fa-brands fa-github', 'label' => 'GitHub'],
+            ['href' => 'https://www.linkedin.com/in/stephan-kenmegne-kamdem/', 'icon' => 'fa-brands fa-linkedin', 'label' => 'LinkedIn'],
+        ]" />
 
-        <li>
-            <a href="mailto:{{ config('portfolio.email') }}" aria-label="Email">
-                <i class="material-icons">email</i>
-            </a>
-        </li>
-    </ul>
+        <a href="mailto:{{ config('portfolio.email') }}" aria-label="Email">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+        </a>
+    </div>
 
 </footer>

@@ -26,8 +26,16 @@
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    overflow: hidden;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+/* Project and personal dropdowns: no fade-in, no transition on the box itself.
+   They appear fully formed, with sharp text. */
+.accordion-item,
+.accordion-item.reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    will-change: auto;
 }
 
 .accordion-item:hover {
@@ -122,15 +130,32 @@
     color: var(--color-text);
 }
 
-/* Project screen dropdowns: zigzag in two columns */
+/* Project dropdowns: one full-width column, so each text block has room to read */
 .zigzag {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
     align-items: start;
     margin-top: 16px;
+    width: 100%;
 }
 
-.zigzag > .accordion-item:nth-child(even) {
-    margin-top: 2.5rem;
+.zigzag > .accordion-item {
+    margin-top: 0;
+    min-width: 0;
+}
+
+.zigzag > .accordion-item > summary {
+    overflow-wrap: anywhere;
+}
+
+.zigzag .accordion-body {
+    overflow-wrap: anywhere;
+}
+
+/* Wide monitors: two columns, with each column at full text width */
+@media (min-width: 1280px) {
+    .zigzag {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }

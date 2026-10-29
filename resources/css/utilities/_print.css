@@ -1,14 +1,17 @@
-/* ===== PRINT ===== */
+/* ===== PRINT =====
+   Every colour comes from the tokens file. The CV and contact pages use the
+   light palette primitives (--paper-*) on paper, whatever the screen theme. */
 
-/* A4 with a comfortable margin */
+/* A4 with a comfortable margin.
+   Browsers ignore var() inside @page, so this stays a literal value.
+   Keep it in step with --print-margin in the tokens file. */
 @page {
     size: A4;
     margin: 12mm;
 }
 
 @media print {
-    /* Keep the colours of the theme on screen, so the paper matches it.
-       Only the page background is set to white, so text and boxes keep their colours. */
+    /* Home and projects: keep the colours of the theme on screen */
     html,
     body,
     body:not(.plain-page) {
@@ -38,6 +41,7 @@
     .side-nav,
     .side-nav--fixed,
     .term-line,
+    .term-status,
     .footer-terminal {
         display: none !important;
     }
@@ -71,18 +75,58 @@
         break-after: avoid;
         page-break-after: avoid;
     }
-}
 
-/* Printing from a phone: use the A4 width, not the screen width */
-@media print {
+    /* Printing from a phone: use the A4 width, not the screen width */
     html, body {
-        width: 210mm;
-        max-width: 210mm;
+        width: var(--print-width);
+        max-width: var(--print-width);
     }
 
     .cv-page,
     .cv-page * {
         max-width: 100% !important;
         box-sizing: border-box;
+    }
+}
+
+/* CV and contact pages: always print with the light palette, whatever the screen theme.
+   Every value references the light primitives declared in the tokens file. */
+@media print {
+    html:has(body.plain-page),
+    body.plain-page {
+        color-scheme: light;
+
+        --color-page-bg: var(--paper-page-bg);
+        --grid-alpha: 0;
+        --scanline-alpha: 0;
+
+        --color-bg: var(--paper-bg);
+        --color-bg-rgb: var(--paper-bg-rgb);
+        --color-surface: var(--paper-surface);
+        --color-surface-raised: var(--paper-surface-raised);
+        --color-tile-start: var(--paper-tile);
+
+        --color-text: var(--paper-text);
+        --color-text-strong: var(--paper-text-strong);
+        --color-text-muted: var(--paper-text-muted);
+        --color-text-faint: var(--paper-text-faint);
+        --color-placeholder: var(--paper-placeholder);
+
+        --color-accent: var(--paper-accent);
+        --color-accent-rgb: var(--paper-accent-rgb);
+        --color-link: var(--paper-accent);
+        --color-link-hover: var(--paper-link-hover);
+
+        --color-border: var(--paper-border);
+        --color-border-hover: var(--paper-border-hover);
+
+        --color-danger: var(--paper-danger);
+        --color-success: var(--paper-success);
+        --color-success-rgb: var(--paper-success-rgb);
+    }
+
+    html:has(body.plain-page),
+    body.plain-page {
+        background-color: var(--paper-page-bg) !important;
     }
 }

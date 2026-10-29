@@ -3,7 +3,7 @@
 @section('title', 'Contact — ' . config('portfolio.name'))
 
 @section('content')
-<section class="screen contact-page">
+<section class="contact-page">
     <div class="screen-body">
         <div class="cf-wrap">
 

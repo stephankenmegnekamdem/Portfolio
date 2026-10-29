@@ -10,16 +10,16 @@
     align-items: center;
     justify-content: center;
     overflow: visible;
-    padding: 32px 24px;
+    padding: clamp(24px, 5vmin, 64px) var(--space-screen);
 }
 
 /* Two columns: info panel (left) and form card (right) */
 .cf-wrap {
-    width: 100%;
-    max-width: 1000px;
+    width: min(92vw, 120vmin);
+    max-width: none;
     display: grid;
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 32px;
+    gap: clamp(20px, 3.5vmin, 48px);
     align-items: stretch;
 }
 
@@ -31,20 +31,86 @@
     }
 }
 
-/* The info panel is an <aside> element. The old stylesheet styled every
-   <aside> on the site with these values. They are now scoped to the panel,
-   so they can't affect any other element.
-   The layout values are copied exactly, including the 2px link spacing the
-   old `aside a` rule added. */
+/* Info panel: fills its column. No outer margin, so the email has the full width. */
 .cf-info {
-    margin: 30px;
-    width: auto;
-    align-items: center;
-    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    justify-content: flex-start;
 }
 
 .cf-info a {
     padding-bottom: 2px;
     border-bottom: solid transparent;
     transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ===== CONTACT: email row and icon-only copy button ===== */
+
+/* Each contact row: icon, email, copy button. Wraps when the column is narrow. */
+.cf-links li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.75rem;
+}
+
+/* The email takes the remaining width and can break onto a second line if needed */
+.cf-links li > a {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+/* Copy button: icon only. The label stays in the markup for screen readers. */
+.cf-copy-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+.cf-copy {
+    position: relative;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.cf-copy:hover,
+.cf-copy:focus-visible {
+    border-color: var(--color-accent);
+    background: rgb(var(--color-accent-rgb) / 0.08);
+    outline: none;
+}
+
+/* Contact text scales with the same unit as the layout */
+.cf-title {
+    font-size: clamp(1.5rem, 4.5vmin, 3.2rem);
+}
+
+.cf-lead {
+    font-size: clamp(0.95rem, 2vmin, 1.25rem);
+}
+
+.cf-info li,
+.cf-links li,
+.cf-reply {
+    font-size: clamp(0.9rem, 1.8vmin, 1.1rem);
 }

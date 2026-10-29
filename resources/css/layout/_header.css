@@ -174,3 +174,16 @@ header {
     text-underline-offset: 6px;
     outline: none;
 }
+
+/* Theme icon: sun in light mode, moon in dark mode */
+.theme-icon--light {
+    display: none;
+}
+
+:root[data-theme="light"] .theme-icon--light {
+    display: inline-block;
+}
+
+:root[data-theme="light"] .theme-icon--dark {
+    display: none;
+}

@@ -1,17 +1,24 @@
-/* ===== TERMINAL: TYPED COMMAND LINE ===== */
+/* ===== TERMINAL: COMMAND LINES =====
+   Hero and plain pages: one line fixed below the header.
+   Other sections: a bar at the top of each section, with its space reserved,
+   so the content never moves when the command appears. */
+
+/* Fixed line under the header */
 .term-line {
-    position: absolute;
-    top: 16px;
+    position: fixed;
+    top: var(--term-top, 64px);
     right: 16px;
     z-index: 40;
+    max-width: calc(100vw - 32px);
     padding: 6px 12px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 0.8rem;
     color: var(--color-terminal-text);
-    background-color: rgb(var(--color-bg-deep-rgb) / 0.85);
+    background-color: rgb(var(--color-bg-deep-rgb) / 0.9);
     border: 1px solid var(--color-chrome-start);
     border-radius: 6px;
     white-space: nowrap;
+    overflow: hidden;
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -21,9 +28,31 @@
     opacity: 1;
 }
 
-/* On the CV and contact pages the line sits fixed in the top corner */
-.term-line--fixed {
-    position: fixed;
+/* Bar at the top of each section. It always takes its space, so text never jumps. */
+.term-bar {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 100%;
+    min-height: 2rem;
+    margin: 0 0 1.25rem;
+    padding: 0.35rem 0.85rem;
+    box-sizing: border-box;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: var(--color-terminal-text);
+    background-color: rgb(var(--color-bg-deep-rgb) / 0.9);
+    border: 1px solid var(--color-chrome-start);
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.term-bar.is-on {
+    opacity: 1;
 }
 
 /* Blinking cursor */
@@ -35,27 +64,73 @@
     50% { opacity: 0; }
 }
 
-/* ===== TERMINAL: PIXELATED IMAGES ===== */
-.is-pixelated {
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+/* ===== TERMINAL: END-OF-PAGE MESSAGE =====
+   A framed block centred above the footer bar, the same width as the content. */
+.footer-end {
+    display: flex;
+    justify-content: center;
+    padding: clamp(32px, 6vmin, 80px) var(--space-screen) clamp(20px, 3vmin, 40px);
+    box-sizing: border-box;
 }
 
-/* ===== TERMINAL: FOOTER MESSAGE ===== */
 .footer-terminal {
+    width: 100%;
+    max-width: min(40rem, 100%);
+    padding: clamp(12px, 2vmin, 20px) clamp(16px, 2.5vmin, 28px);
+    box-sizing: border-box;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    color: var(--color-terminal-text);
-    font-size: 1rem;
+    font-size: clamp(0.85rem, 1.6vmin, 1.1rem);
     line-height: 1.7;
+    text-align: left;
     white-space: pre-line;
+    color: var(--color-terminal-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+/* ===== TYPEWRITER: final size from the start =====
+   Every letter is always in the layout. Typed letters are visible,
+   the rest are transparent, so boxes never grow while text is written. */
+.tw-off {
+    color: transparent;
+}
+
+/* Blinking cursor drawn without taking up any width */
+.tw-on.is-typing::after {
+    content: "_";
+    display: inline-block;
+    width: 0;
+    overflow: visible;
+    color: inherit;
+    animation: term-blink 1s steps(1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .term-cursor {
+    .tw-on.is-typing::after {
         animation: none;
     }
+}
 
-    .term-line {
-        transition: none;
-    }
+/* End-of-page message: a block, so the cursor follows the text onto its last line */
+.term-bar--end {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 1.5rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    white-space: pre-line;
+    opacity: 1;
+    overflow: visible;
+}
+
+.term-bar--end span {
+    display: inline;
+}
+
+/* Keep the cursor blinking after the message is complete */
+.term-bar--end .term-cursor {
+    display: inline;
 }

@@ -3,7 +3,7 @@
 /* Circle size shrinks as the number of items grows, clamped to a usable range.
    The --n value is set inline by the timeline component. */
 .timeline-section {
-    --size: clamp(36px, calc((100dvh - 15rem) / var(--n, 1) - 1.5rem), 104px);
+    --size: min(var(--circle-size), calc((100dvh - 12rem) / var(--n, 1)));
 }
 
 .timeline-hint {

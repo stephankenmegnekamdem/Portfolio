@@ -1,117 +1,188 @@
 /* ===== DESIGN TOKENS =====
-   Colours, spacing and radii used by the whole site.
+   Variation on the original blue palette, with every colour drawn from one
+   blue hue ramp (hue ~220 to 225) so nothing clashes. Orange is kept as the
+   single complementary accent for the active nav underline and focus.
+   Chrome (header/footer) is always dark.
+   Contrast targets (WCAG 2.2): body text 4.5:1 minimum, UI outlines 3:1.
+   Ratios are estimates from the hex values; check them with a contrast tool. */
 
-   The page always carries data-theme="light" or data-theme="dark"
-   (set before paint by the head script, see partials/head.blade.php).
-   - :root                      dark values (default)
-   - :root[data-theme="light"]  light values, only the ones that change
-
-   Values that are the same in both themes are defined once in :root. */
 :root {
     /* ---- Shared: same in both themes ---- */
 
     /* Header, footer and brand chrome (always dark) */
     --color-chrome-start: #1E3A8A;
-    --color-chrome-end: #1D4ED8;
-    --color-nav-text: rgb(255 255 255 / 0.75);
-    --color-highlight: #FF6B1A;      /* underline on the active nav link */
-    /* Chrome: header and footer, always dark, so these never change with the theme */
-    --color-chrome-text: #94A3B8;        /* copyright line */
-    --color-chrome-link: #38BDF8;        /* footer icons */
-    --color-chrome-link-hover: #7DD3FC;
-    --color-chrome-border: #2B4C7E;
+    --color-chrome-end: #1E40AF;
+    --color-nav-text: rgb(255 255 255 / 0.8);
+    --color-highlight: #FF8A3D;          /* orange: active nav underline, the one complementary accent */
+    --color-chrome-text: #A5B4CF;        /* about 6:1 on chrome */
+    --color-chrome-link: #93C5FD;
+    --color-chrome-link-hover: #BFDBFE;
+    --color-chrome-border: #2E4C86;
     --color-white: #FFFFFF;
 
-    /* Buttons (white text on blue, works in both themes) */
-    --color-button-start: #1D4ED8;
-    --color-button-end: #3B82F6;
-    --color-button-glow-rgb: 59 130 246;
+    /* Buttons: white text on the blue ramp, about 6.5:1 */
+    --color-button-start: #1E40AF;
+    --color-button-end: #2563EB;
+    --color-button-glow-rgb: 37 99 235;
+    --color-button-text: #FFFFFF;
 
     /* Terminal (always dark, with light text) */
-    --color-bg-deep: #050B16;
-    --color-bg-deep-rgb: 5 11 22;
-    --color-terminal-text: #60A5FA;
+    --color-bg-deep: #0A1224;
+    --color-bg-deep-rgb: 10 18 36;
+    --color-terminal-text: #93C5FD;
+    --color-terminal-prompt: #FF8A3D;
 
     /* Spacing */
     --space-screen: 24px;
-    --space-screen-phone: 16px;      /* below 768px */
-    --space-screen-tablet: 40px;     /* 768px to 1279px */
-    --space-screen-desktop: 56px;    /* 1280px and up */
+    --space-screen-phone: 16px;          /* below 768px */
+    --space-screen-tablet: 40px;         /* 768px to 1279px */
+    --space-screen-desktop: 56px;        /* 1280px and up */
 
     /* Radii */
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
 
+    /* Focus ring: orange, visible on dark and light surfaces */
+    --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-highlight);
+
+    /* Gradients and shadows built only from the blue ramp */
+    --gradient-panel: linear-gradient(160deg, rgb(59 130 246 / 0.10), rgb(59 130 246 / 0) 60%);
+    --gradient-sheen: linear-gradient(180deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0));
+    --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 12px 32px -16px rgb(5 11 22 / 0.7);
+    --shadow-glow: 0 0 0 1px rgb(59 130 246 / 0.3), 0 0 24px -6px rgb(59 130 246 / 0.5);
+
     /* ---- Dark theme (default) ---- */
     color-scheme: dark;
 
     /* Page and decoration */
-    --color-page-bg: #050B16;        /* background of home and projects pages */
-    --grid-alpha: 0.05;              /* strength of the background grid */
-    --scanline-alpha: 0.04;          /* strength of the scanlines */
+    --color-page-bg: #050B16;            /* background of home and projects pages */
+    --grid-alpha: 0.05;
+    --scanline-alpha: 0.04;
 
-    /* Surfaces */
+    /* Surfaces: stepped up the same blue ramp */
     --color-bg: #0F172A;
     --color-bg-rgb: 15 23 42;
     --color-surface: #0C1A2E;
     --color-surface-raised: #1E293B;
-    --color-tile-start: #1E3A8A;     /* start of gradient on cards and tiles */
+    --color-tile-start: #1E3A8A;         /* start of gradient on cards and tiles */
 
-    /* Text */
-    --color-text: #E2E8F0;
-    --color-text-strong: #F1F5F9;
-    --color-text-muted: #94A3B8;
-    --color-text-faint: #64748B;
-    --color-placeholder: #475569;
+    /* Text: cool blue-grey, all from the same ramp */
+    --color-text: #E2E8F0;               /* about 15:1 on page */
+    --color-text-strong: #F8FAFC;
+    --color-text-muted: #A5B4CF;         /* about 8:1 */
+    --color-text-faint: #8493B0;         /* about 5.4:1, safe for body text */
+    --color-placeholder: #7A88A6;        /* about 4.9:1 */
 
-    /* Accent and links */
+    /* Accent and links: light blue */
     --color-accent: #60A5FA;
     --color-accent-rgb: 96 165 250;
-    --color-link: #38BDF8;
-    --color-link-hover: #7DD3FC;
+    --color-link: #93C5FD;               /* about 10:1 */
+    --color-link-hover: #BFDBFE;
 
     /* Borders */
-    --color-border: #2B4C7E;
+    --color-border: #2B4C7E;             /* decorative only */
     --color-border-hover: #3B66A3;
+    --color-border-control: #5A78A6;     /* input outlines, about 3.6:1 */
 
-    /* Status */
+    /* Images: a blue frame and scrim so photos of any colour sit in one system */
+    --color-frame: rgb(96 165 250 / 0.35);
+    --color-scrim-rgb: 5 11 22;          /* matches page background */
+
+    /* Status: kept distinct from the blue family so they still read as status */
     --color-danger: #F87171;
     --color-success: #4ADE80;
     --color-success-rgb: 34 197 94;
+    --color-warning: #FF8A3D;
+
+    /* ---- Fluid scale (unchanged) ---- */
+    --content-max: 1200px;
+    --circle-size: clamp(56px, 9vmin, 150px);
+    --photo-size: clamp(120px, 22vmin, 280px);
 }
 
-/* ---- Light theme ----
-   Applied when the page carries data-theme="light". The head script sets this
-   from the saved choice, or from the system setting when nothing is saved. */
+/* ===== PAPER: light palette primitives =====
+   Named once. The light theme and the print stylesheet both reference these. */
+:root {
+    --paper-page-bg: #F8FAFC;
+    --paper-bg: #F8FAFC;
+    --paper-bg-rgb: 248 250 252;
+    --paper-surface: #FFFFFF;
+    --paper-surface-raised: #F1F5F9;
+    --paper-tile: #DBEAFE;
+
+    --paper-text: #0F172A;               /* about 17:1 on white */
+    --paper-text-strong: #020617;
+    --paper-text-muted: #475569;         /* about 7.6:1 */
+    --paper-text-faint: #64748B;         /* about 4.8:1 */
+    --paper-placeholder: #64748B;        /* about 4.8:1 */
+
+    --paper-accent: #1D4ED8;             /* about 6.7:1 on white */
+    --paper-accent-rgb: 29 78 216;
+    --paper-link-hover: #1E3A8A;
+
+    --paper-border: #CBD5E1;             /* decorative only */
+    --paper-border-hover: #94A3B8;
+    --paper-border-control: #7D8DA3;     /* input outlines, about 3.5:1 */
+
+    --paper-danger: #B91C1C;
+    --paper-success: #15803D;
+    --paper-success-rgb: 21 128 61;
+    --paper-warning: #B45309;            /* orange darkened to pass on white */
+
+    /* Print-only page settings */
+    --print-margin: 12mm;
+    --print-width: 210mm;
+}
+
+/* ---- Light theme ---- */
 :root[data-theme="light"] {
     color-scheme: light;
 
-    --color-page-bg: #F8FAFC;
-    --grid-alpha: 0.06;              /* a faint blue grid, like engineering paper */
-    --scanline-alpha: 0;             /* no scanlines on light pages */
+    --color-page-bg: var(--paper-page-bg);
+    --grid-alpha: 0.06;
+    --scanline-alpha: 0;
 
-    --color-bg: #F8FAFC;             /* slate 50: softer than pure white */
-    --color-bg-rgb: 248 250 252;
-    --color-surface: #FFFFFF;
-    --color-surface-raised: #F1F5F9;
-    --color-tile-start: #DBEAFE;     /* light blue: text stays readable on it */
+    --color-bg: var(--paper-bg);
+    --color-bg-rgb: var(--paper-bg-rgb);
+    --color-surface: var(--paper-surface);
+    --color-surface-raised: var(--paper-surface-raised);
+    --color-tile-start: var(--paper-tile);
 
-    --color-text: #0F172A;
-    --color-text-strong: #020617;
-    --color-text-muted: #475569;
-    --color-text-faint: #64748B;
-    --color-placeholder: #64748B;
+    --color-text: var(--paper-text);
+    --color-text-strong: var(--paper-text-strong);
+    --color-text-muted: var(--paper-text-muted);
+    --color-text-faint: var(--paper-text-faint);
+    --color-placeholder: var(--paper-placeholder);
 
-    --color-accent: #1D4ED8;
-    --color-accent-rgb: 29 78 216;
-    --color-link: #1D4ED8;
-    --color-link-hover: #1E3A8A;
+    --color-accent: var(--paper-accent);
+    --color-accent-rgb: var(--paper-accent-rgb);
+    --color-link: var(--paper-accent);
+    --color-link-hover: var(--paper-link-hover);
 
-    --color-border: #CBD5E1;
-    --color-border-hover: #94A3B8;
+    --color-border: var(--paper-border);
+    --color-border-hover: var(--paper-border-hover);
+    --color-border-control: var(--paper-border-control);
 
-    --color-danger: #B91C1C;
-    --color-success: #15803D;
-    --color-success-rgb: 21 128 61;
+    --color-frame: rgb(var(--paper-accent-rgb) / 0.4);
+    --color-scrim-rgb: var(--paper-bg-rgb);
+
+    --color-danger: var(--paper-danger);
+    --color-success: var(--paper-success);
+    --color-success-rgb: var(--paper-success-rgb);
+    --color-warning: var(--paper-warning);
+}
+
+/* ===== FLUID SCALE: everything scales from the same unit =====
+   vmin = the smaller of the window's width and height. */
+:root {
+    --space-screen: clamp(16px, 3.2vmin, 56px);
+    --content-max: 1200px;
+    --circle-size: clamp(56px, 9vmin, 150px);
+    --photo-size: clamp(120px, 22vmin, 280px);
+}
+
+/* Base text size scales with the window's smaller side */
+html {
+    font-size: clamp(14px, min(0.95vw, 1.8vh), 22px);
 }

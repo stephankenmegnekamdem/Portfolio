@@ -1,24 +1,87 @@
 /* ===== BASE: DEFAULTS FOR EVERY PAGE ===== */
+
 html, body {
     height: 100%;
     margin: 0;
 }
 
 body {
-    background-color: var(--color-bg);
+    background-color: var(--color-page-bg);
+    color: var(--color-text);
     display: block;
+    -webkit-font-smoothing: antialiased;
 }
 
+/* Selection uses the accent so it reads as part of the same system */
+::selection {
+    background: rgb(var(--color-accent-rgb) / 0.3);
+    color: var(--color-text-strong);
+}
+
+/* Links: underlined by default so they never rely on colour alone */
 a {
     color: var(--color-link);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
 }
 
 a:hover {
     color: var(--color-link-hover);
-    text-decoration: underline;
+    text-decoration-thickness: 2px;
 }
 
+/* Keyboard focus: a visible amber ring on every interactive element */
+:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+}
 
-.my-black { color: var(--color-text) ; }
-.my-dark  { color: var(--color-text-muted) ; }
-.my-grey  { color: var(--color-text-muted) ; }
+/* Text colour helpers.
+   .my-dark and .my-grey are now distinct:
+   dark = the strongest text, grey = the muted secondary text. */
+.my-black { color: var(--color-text); }
+.my-dark  { color: var(--color-text-strong); }
+.my-grey  { color: var(--color-text-muted); }
+
+/* Framed image: a thin teal border and a soft glow, so photos of any colour
+   look like they belong to the same system. Use on <img> or on a wrapper. */
+.frame-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-frame);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.2), 0 8px 24px -12px rgb(var(--color-accent-rgb) / 0.35);
+}
+
+/* Text over a photo: a gradient scrim keeps the text readable on any picture */
+.scrim {
+    position: relative;
+    isolation: isolate;
+}
+
+.scrim::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        rgb(var(--color-scrim-rgb) / 0.92) 0%,
+        rgb(var(--color-scrim-rgb) / 0.55) 45%,
+        rgb(var(--color-scrim-rgb) / 0) 100%
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Respect users who ask for less motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

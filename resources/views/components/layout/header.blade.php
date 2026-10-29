@@ -52,10 +52,11 @@
         @endif
     </div>
 
-    <button type="button" class="theme-toggle" data-theme-toggle aria-label="Change colour theme">
-        <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-        <span class="theme-toggle-label">Theme</span>
-    </button>
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+        <i class="fa-solid fa-sun theme-icon theme-icon--light" aria-hidden="true"></i>
+        <i class="fa-solid fa-moon theme-icon theme-icon--dark" aria-hidden="true"></i>
+        <span class="theme-toggle-label">Dark</span>
+        </button>
 </div>
 
 {{-- Page-specific content (hero on home, project grid on projects) comes in through the slot --}}

@@ -7,7 +7,6 @@
         ['href' => '#work',           'label' => 'Work'],
         ['href' => '#skills',         'label' => 'Skills'],
         ['href' => '#certifications', 'label' => 'Certifications'],
-        ['href' => '#footer',         'label' => 'End'],
     ],
     'fixed' => false,
 ])
@@ -19,7 +18,10 @@
 
     <div class="side-nav-panel">
         @foreach($sections as $section)
-            <a href="{{ $section['href'] }}">{{ $section['label'] }}</a>
+            <a href="{{ $section['href'] }}" class="side-nav-item">
+                <span class="side-nav-dot" aria-hidden="true"></span>
+                <span class="side-nav-label">{{ $section['label'] }}</span>
+            </a>
         @endforeach
     </div>
 </nav>

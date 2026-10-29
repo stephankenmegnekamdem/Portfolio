@@ -1,33 +1,74 @@
-/* ===== FOOTER =====
-   The footer is always dark blue in both themes, so its text and icons use
-   fixed chrome colours instead of the theme text colours. */
-footer {
-    flex-shrink: 0;
-    padding: 20px;
+/* ===== FOOTER: one row, same height as the header bar ===== */
+
+/* The footer section should only be as tall as the bar itself */
+.screen.screen-footer {
+    min-height: 0;
+    height: auto;
+    justify-content: flex-start;
+}
+
+.screen-footer > .screen-body {
+    flex: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+}
+
+.site-footer {
+    height: 5vh;
+    min-height: 44px;
+    max-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0 20px;
+    box-sizing: border-box;
     background: linear-gradient(90deg, var(--color-chrome-start), var(--color-chrome-end));
     border-top: 2px solid var(--color-chrome-border);
+}
+
+.site-footer-copy {
+    font-size: 0.8rem;
     color: var(--color-chrome-text);
+    white-space: nowrap;
 }
 
-footer a {
+.site-footer-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Social links and email share one style */
+.site-footer-links a {
+    display: inline-flex;
+    align-items: center;
     color: var(--color-chrome-link);
+    font-size: 1.05rem;
+    line-height: 1;
 }
 
-footer a:hover {
+.site-footer-links a:hover,
+.site-footer-links a:focus-visible {
     color: var(--color-chrome-link-hover);
 }
 
-/* The copyright line uses .my-grey, which the theme changes. Override it here.
-   The more specific selector beats .my-grey's !important. */
-footer .my-grey {
-    color: var(--color-chrome-text) !important;
+/* Keep the social links component tidy inside the row */
+.site-footer-links ul,
+.site-footer-links li {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-/* Phones: no footer band. The social links and closing line are hidden. */
+/* Phones: the footer is hidden */
 @media (max-width: 767px) {
     .screen-footer,
-    footer,
-    .footer {
+    .site-footer {
         display: none !important;
     }
 }

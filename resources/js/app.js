@@ -8,6 +8,7 @@ import { initSideNav } from './modules/side-nav';
 import { initTerminal } from './modules/terminal';
 import { initTypewriter } from './modules/typewriter';
 import { initTheme } from './modules/theme';
+import { initPageSnap } from './modules/page-snap';
 
 initScrollCue();
 initProgressBar();
@@ -19,3 +20,4 @@ initSideNav();
 initTerminal();
 initTypewriter();
 initTheme();
+initPageSnap();

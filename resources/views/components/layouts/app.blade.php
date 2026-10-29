@@ -23,12 +23,12 @@
 
         @yield('content')
 
-        <section class="screen screen-footer">
-            <div class="screen-body">
-                @yield('outro')
-            </div>
-            <x-layout.footer />
-        </section>
+            <section class="screen screen-footer" id="footer">
+                <div class="screen-body">
+                    @yield('outro')
+                </div>
+                <x-layout.footer />
+            </section>
 
     </main>
 

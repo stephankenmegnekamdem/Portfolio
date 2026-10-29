@@ -7,8 +7,7 @@
             collect($projects)->map(fn ($p) => [
                 'href'  => '#' . \Illuminate\Support\Str::slug($p['title']),
                 'label' => $p['title'],
-            ])->all(),
-            [['href' => '#footer', 'label' => 'End']]
+            ])->all()
         );
     @endphp
 

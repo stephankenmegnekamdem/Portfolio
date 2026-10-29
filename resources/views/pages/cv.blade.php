@@ -8,7 +8,7 @@
 
         <div class="detailed-info my-dark">
 
-            <!-- LEFT COLUMN: photo, contact, languages, skills -->
+            <!-- LEFT COLUMN: photo, contact, skills, languages, hobbies -->
             <div class="cv-left">
 
                 <div class="profile">
@@ -25,15 +25,6 @@
                         <li>07 81 18 53 06</li>
                         <li>Linkedin: <a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem/">@stephankenmegnekamdem</a></li>
                         <li>Github: <a href="https://github.com/stephankenmegnekamdem">@stephankenmegnekamdem</a></li>
-                    </ul>
-                </section>
-
-                <section class="block">
-                    <h5>Languages</h5>
-                    <ul class="plain">
-                        <li>English: Native</li>
-                        <li>French: Native</li>
-                        <li>Turkish: B2</li>
                     </ul>
                 </section>
 
@@ -59,6 +50,15 @@
                 </section>
 
                 <section class="block">
+                    <h5>Languages</h5>
+                    <ul class="plain">
+                        <li>English: Native</li>
+                        <li>French: Native</li>
+                        <li>Turkish: B2</li>
+                    </ul>
+                </section>
+
+                <section class="block">
                     <h5>Hobbies</h5>
                     <ul class="plain">
                         <li>Chess player</li>
@@ -68,7 +68,7 @@
                 </section>
             </div>
 
-            <!-- RIGHT COLUMN -->
+            <!-- RIGHT COLUMN: profile, education, experience, projects -->
             <div class="cv-right">
 
                 <section class="block" id="about-me">
@@ -181,6 +181,20 @@
 
                     <div class="entry project" id="project3">
                         <div class="entry-head">
+                            <span class="entry-title">Personal Portfolio Website</span>
+                            <span class="entry-date">05/10/2025 – CURRENT</span>
+                        </div>
+                        <p class="entry-sub">Laravel, PHP, CSS, JavaScript, Vite</p>
+                        <ul>
+                            <li>Designed and built a personal portfolio website with Laravel and PHP, structuring routing,
+                                controllers and Blade views to present projects and professional experience
+                            </li>
+                        </ul>
+                        <p><a href="https://github.com/stephankenmegnekamdem/Portfolio">GitHub</a></p>
+                    </div>
+
+                    <div class="entry project" id="project4">
+                        <div class="entry-head">
                             <span class="entry-title">Learn Base Conversion</span>
                             <span class="entry-date">01/09/2025 – 12/01/2026</span>
                         </div>
@@ -192,20 +206,6 @@
                             <li>Verified conversion logic for correctness</li>
                         </ul>
                         <p><a href="https://github.com/stephankenmegnekamdem/learningbaseconversions">GitHub</a></p>
-                    </div>
-
-                    <div class="entry project" id="project4">
-                        <div class="entry-head">
-                            <span class="entry-title">Personal Portfolio Website</span>
-                            <span class="entry-date">05/10/2025 – CURRENT</span>
-                        </div>
-                        <p class="entry-sub">Laravel, PHP, CSS, JavaScript, Vite</p>
-                        <ul>
-                            <li>Designed and built a personal portfolio website with Laravel and PHP, structuring routing,
-                                controllers and Blade views to present projects and professional experience
-                            </li>
-                        </ul>
-                        <p><a href="https://github.com/stephankenmegnekamdem/Portfolio">GitHub</a></p>
                     </div>
                 </section>
 
