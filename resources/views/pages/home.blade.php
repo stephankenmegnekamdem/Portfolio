@@ -167,17 +167,44 @@
     </section>
 @endif
 
-{{-- Certifications: plain images --}}
+{{-- Certifications: images with spacing and a caption for each --}}
 @if(!empty($certs))
     <section class="screen">
         <div class="screen-body">
 
-            <section class="sections" id="certifications">
+            <section class="sections certifications" id="certifications">
                 <h2 class="my-black">Certifications</h2>
-                @foreach($certs as $cert)
-                    <img class="my-certifications" src="{{ asset($cert) }}" alt="Certification">
-                @endforeach
+
+                <div class="cert-list">
+                    @foreach($certs as $cert)
+                        @php
+                            // Each entry is either a plain image path, or an array with image, title and description
+                            $image = is_array($cert) ? $cert['image'] : $cert;
+                            $title = is_array($cert) ? ($cert['title'] ?? null) : null;
+                            $desc  = is_array($cert) ? ($cert['description'] ?? null) : null;
+                        @endphp
+
+                        <figure class="cert-item">
+                            <img class="my-certifications"
+                                 src="{{ asset($image) }}"
+                                 alt="{{ $title ?? 'Certification' }}"
+                                 loading="lazy">
+
+                            @if($title || $desc)
+                                <figcaption class="cert-caption">
+                                    @if($title)
+                                        <strong>{{ $title }}</strong>
+                                    @endif
+                                    @if($desc)
+                                        <p>{{ $desc }}</p>
+                                    @endif
+                                </figcaption>
+                            @endif
+                        </figure>
+                    @endforeach
+                </div>
             </section>
+
         </div>
     </section>
 @endif

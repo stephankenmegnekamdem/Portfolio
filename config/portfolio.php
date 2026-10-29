@@ -280,12 +280,36 @@ return [
             'descriptions' => [''],
         ],
         'certifications' => [
-                        'assets/images/certs/certs1.png',
-                        'assets/images/certs/certs2.png',
-                        'assets/images/certs/certs3.png',
-                        'assets/images/certs/certs4.png',
-                        'assets/images/certs/certs5.png',
-                        'assets/images/certs/certs6.png',
-                    ],
+    [
+        'image'       => 'assets/images/certs/certs1.png',
+        'title'       => 'Artificial Intelligence Certificate Program, Module 1',
+        'description' => 'The first of three modules in an artificial intelligence programme run by the Continuing Education Application and Research Centre of Istanbul Nişantaşı University. Completed as 12 hours of training from 10 to 20 February 2025, it is the starting point of the series.',
+    ],
+    [
+        'image'       => 'assets/images/certs/certs2.png',
+        'title'       => 'Machine Learning Fundamentals, Module 2',
+        'description' => 'The second module, "Fundamentals of Machine Learning", from the Continuing Education Centre of Istanbul Nişantaşı University. It covers how models learn patterns from data. Completed as 12 hours of training from 3 to 16 March 2025.',
+    ],
+    [
+        'image'       => 'assets/images/certs/certs3.png',
+        'title'       => 'Artificial Intelligence Certificate Program, Module 3',
+        'description' => 'The third and final module of the same artificial intelligence programme, building on the first two. Completed as 12 hours of training from 9 to 23 April 2025, run by the Continuing Education Application and Research Centre of Istanbul Nişantaşı University.',
+    ],
+    [
+        'image'       => 'assets/images/certs/certs4.png',
+        'title'       => 'Generative AI Webinar: Autoencoder Models',
+        'description' => 'A webinar on autoencoders, a type of neural network that learns a compressed representation of data and can be used to generate new content. Held on 25 March 2025 as part of the Generative AI webinar series of the Digital Genç Artificial Intelligence Ecosystem, organised by the Digital Transformation Office of the Presidency of the Republic of Türkiye.',
+    ],
+    [
+        'image'       => 'assets/images/certs/certs5.png',
+        'title'       => 'Generative AI Webinar: Mathematical Foundations of AI II',
+        'description' => 'The second session of a series on the mathematics behind artificial intelligence, titled "From Vectors to Algorithms". It shows how vectors and mathematical structures form the basis of the algorithms used in AI. Held on 24 February 2025 as part of the Digital Genç Artificial Intelligence Ecosystem, organised by the Digital Transformation Office of the Presidency of the Republic of Türkiye.',
+    ],
+    [
+        'image'       => 'assets/images/certs/certs6.png',
+        'title'       => 'Green Homeland Campaign: One Ticket, One Tree',
+        'description' => 'A recognition, not a training certificate. It comes from the "Green Homeland Mobilisation" initiative of the Ministry of Agriculture and Forestry and the Ministry of Transport and Infrastructure, with TCDD. It records that a tree will be planted in your name for a high-speed train journey, as part of the "Every Ticket, One Tree" project.',
+    ],
+    ],
     ],
 ];

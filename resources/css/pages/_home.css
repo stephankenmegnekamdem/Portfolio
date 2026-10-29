@@ -34,6 +34,53 @@
     height: auto;
     object-fit: contain;
 }
+/* ===== CERTIFICATIONS: image on the left, caption on the right ===== */
+.cert-list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(28px, 5vmin, 56px);
+}
+
+.cert-item {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(20px, 4vmin, 48px);
+}
+
+.my-certifications {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-surface);
+}
+
+.cert-caption {
+    color: var(--color-text-muted);
+    font-size: clamp(0.9rem, 1.8vmin, 1.1rem);
+    line-height: 1.6;
+}
+
+.cert-caption strong {
+    display: block;
+    color: var(--color-text-strong);
+    font-size: clamp(1rem, 2.2vmin, 1.3rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+}
+
+.cert-caption p {
+    margin: 0;
+}
+
+
+
+
 
 /* ===== PHONE TIMELINE (education, projects, work, skills) ===== */
 @media (max-width: 767px) {
@@ -151,5 +198,11 @@
 
     .hero-logo {
         height: 32px;
+    }
+    .my-certifications {
+        width: 100%;
+    }
+    .cert-item {
+        grid-template-columns: 1fr;
     }
 }
