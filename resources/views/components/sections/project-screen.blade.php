@@ -4,26 +4,39 @@
     use Illuminate\Support\Str;
 
     $id    = Str::slug($project['title']);
-    $shots = $project['screenshots'] ?? [$project['image']];
+    $shots = !empty($project['screenshots'])
+                ? $project['screenshots']
+                : array_filter([$project['image'] ?? null]);
 
-    // Each dropdown reads one key from the project.
-    // Empty keys are skipped, so a project shows only what you filled in.
-    $sections = [
-        ['label' => 'What it is',                  'value' => $project['description'] ?? null],
-        ['label' => 'Technologies used',           'value' => $project['technologies'] ?? null],
-        ['label' => 'Why it matters',              'value' => $project['why'] ?? null],
-        ['label' => 'How to ship it as a product', 'value' => $project['ship'] ?? null],
-        ['label' => 'What to add next',            'value' => $project['next'] ?? null],
-        ['label' => 'What it proves',              'value' => $project['proves'] ?? null],
-    ];
+    // "open" blocks are the main story and show at once.
+    // The others sit behind one button, so the page stays calm.
+    $blocks = array_filter([
+        ['label' => 'What it is',                  'value' => $project['description'] ?? null, 'type' => 'text', 'open' => true],
+        ['label' => 'Technologies used',           'value' => $project['technologies'] ?? [],  'type' => 'tags', 'open' => true],
+        ['label' => 'Why it matters',              'value' => $project['why'] ?? null,         'type' => 'text', 'open' => true],
+        ['label' => 'How to ship it as a product', 'value' => $project['ship'] ?? [],          'type' => 'list', 'open' => false],
+        ['label' => 'What to add next',            'value' => $project['next'] ?? [],          'type' => 'list', 'open' => false],
+        ['label' => 'What it proves',              'value' => $project['proves'] ?? [],        'type' => 'tags', 'open' => false],
+    ], fn ($b) => !empty($b['value']));
+
+    $main = array_values(array_filter($blocks, fn ($b) => $b['open']));
+    $more = array_values(array_filter($blocks, fn ($b) => !$b['open']));
 @endphp
 
-<section class="screen project-screen" id="{{ $id }}">
+<section class="screen project-screen" id="{{ $id }}" data-no-type>
     <div class="screen-body">
 
-        <h2 class="project-screen-title">{{ $project['title'] }}</h2>
+        <header class="pdetail-head">
+            <h2 class="project-screen-title">{{ $project['title'] }}</h2>
 
-        {{-- Screenshot catalogue: horizontal strip, tap to open full size --}}
+            @if(!empty($project['url']))
+                <a class="pdetail-link" href="{{ $project['url'] }}" target="_blank" rel="noopener">
+                    View the code <span aria-hidden="true">→</span>
+                </a>
+            @endif
+        </header>
+
+        {{-- Screenshots: horizontal strip, open full size on click --}}
         <div class="shots">
             @foreach($shots as $shot)
                 <a href="{{ asset($shot) }}" target="_blank" rel="noopener" class="shot">
@@ -34,32 +47,29 @@
             @endforeach
         </div>
 
-        {{-- Zigzag dropdowns --}}
-        <div class="zigzag" data-no-reveal data-no-type>
-            @foreach($sections as $s)
-                @if(!empty($s['value']))
-                    <details class="accordion-item">
-                        <summary>{{ $s['label'] }}</summary>
-                        <div class="accordion-body">
-                            @if(is_array($s['value']))
-                                <ul>
-                                    @foreach($s['value'] as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach
-                                </ul>
-                            @else
-                                <p>{{ $s['value'] }}</p>
-                            @endif
-                        </div>
-                    </details>
-                @endif
-            @endforeach
-        </div>
+        {{-- Main information: visible straight away --}}
+        @if(!empty($main))
+            <div class="pdetail-grid">
+                @foreach($main as $block)
+                    <x-sections.pdetail-card :block="$block" />
+                @endforeach
+            </div>
+        @endif
 
-        @if(!empty($project['url']))
-            <p class="project-screen-link">
-                <a href="{{ $project['url'] }}" target="_blank" rel="noopener">View the code →</a>
-            </p>
+        {{-- Everything else: one button opens and closes it --}}
+        @if(!empty($more))
+            <details class="pdetail-more">
+                <summary>
+                    <span class="pdetail-more-open">Show more: shipping, next steps and skills proven</span>
+                    <span class="pdetail-more-close">Hide the extra details</span>
+                </summary>
+
+                <div class="pdetail-grid">
+                    @foreach($more as $block)
+                        <x-sections.pdetail-card :block="$block" />
+                    @endforeach
+                </div>
+            </details>
         @endif
 
     </div>

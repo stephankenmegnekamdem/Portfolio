@@ -1,4 +1,15 @@
-/* ===== SCROLL PROGRESS BAR ===== */
+/* =====================================================================
+   MOTION
+   Scroll progress bar, and the reveal class.
+   Content is never hidden: the reveal class is kept so the JavaScript
+   still runs, but it no longer hides anything.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. Scroll progress bar (top of the page)
+   --------------------------------------------------------------------- */
+
 .scroll-progress {
     position: fixed;
     top: 0;
@@ -11,27 +22,23 @@
     transition: width 0.1s linear;
 }
 
-/* ===== REVEAL ON SCROLL =====
-   Only applies when JavaScript has added the .reveal class,
-   so content stays visible if the script doesn't run. */
-.reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
 
+/* ---------------------------------------------------------------------
+   2. Reveal: visible at all times
+   --------------------------------------------------------------------- */
+
+.reveal,
 .reveal.is-visible {
     opacity: 1;
     transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
 
+/* ---------------------------------------------------------------------
+   3. Reduced motion
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
     .scroll-progress {
         transition: none;
     }

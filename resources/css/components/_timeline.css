@@ -1,155 +1,392 @@
-/* ===== TIMELINE (education, projects, work, skills) ===== */
+/* =====================================================================
+   TIMELINE CARDS
+   Used by: education, projects, work and skills (home page),
+   plus the skill-group and language cards.
+   Colours come from base/_variables.css, so both themes work.
+   ===================================================================== */
 
-/* Circle size shrinks as the number of items grows, clamped to a usable range.
-   The --n value is set inline by the timeline component. */
-.timeline-section {
-    --size: min(var(--circle-size), calc((100dvh - 12rem) / var(--n, 1)));
+
+/* ---------------------------------------------------------------------
+   1. Section header: title and intro centred, count top-right
+   --------------------------------------------------------------------- */
+
+.tsection-head {
+    position: relative;
+    display: block;
+    text-align: center;
+    margin-bottom: clamp(16px, 2.8vmin, 26px);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
 }
 
-.timeline-hint {
-    color: var(--color-text-muted);
-    font-size: 0.85rem;
-    margin: 0 0 1rem;
-}
-
-.timeline {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.tsection-head > div {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
-}
-
-.timeline-node {
-    position: relative;
-}
-
-/* The line linking one circle to the next */
-.timeline-node:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    left: calc(var(--size) / 2 - 1px);
-    top: var(--size);
-    bottom: -1.25rem;
-    width: 2px;
-    background: var(--color-border);
-}
-
-.node-summary {
-    display: flex;
     align-items: center;
-    gap: 1rem;
-    cursor: pointer;
-    list-style: none;
 }
 
-.node-summary::-webkit-details-marker {
-    display: none;
-}
-
-/* The circle */
-.node-circle {
-    position: relative;
-    flex-shrink: 0;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    border: 2px solid var(--color-accent);
-    background-color: var(--color-surface);
-    display: grid;
-    place-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.node-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.node-initial {
-    font-size: calc(var(--size) * 0.4);
-    font-weight: 700;
+.tsection-title {
+    margin: 0 0 0.35rem;
     color: var(--color-accent);
-}
-
-.node-summary:hover .node-circle {
-    transform: scale(1.06);
-    box-shadow: 0 0 0 4px rgb(var(--color-accent-rgb) / 0.25);
-}
-
-/* Small "+" badge that shows the circle opens */
-.node-plus {
-    position: absolute;
-    right: -4px;
-    bottom: -4px;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background-color: var(--color-accent);
-    color: var(--color-bg);
+    font-size: clamp(1.25rem, 2.6vmin, 1.7rem);
     font-weight: 700;
-    line-height: 1;
-    display: grid;
-    place-items: center;
-    transition: transform 0.2s ease;
+    line-height: 1.2;
 }
 
-.node[open] .node-plus {
-    transform: rotate(45deg);
-}
-
-.node-title {
-    flex: 1;
-    min-width: 0;
-    font-weight: 600;
-    font-size: 1.05rem;
-}
-
-.node-hint {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+.tsection-intro {
+    margin: 0 auto;
+    max-width: 60ch;
     color: var(--color-text-muted);
-}
-
-.node-hint::after {
-    content: " ▾";
-}
-
-.node[open] .node-hint::after {
-    content: " ▴";
-}
-
-/* The dropdown, indented to sit beside the circle */
-.node-body {
-    margin: 0.75rem 0 0 calc(var(--size) + 1rem);
-    padding: 1rem 1.25rem;
-    background-color: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    font-size: 0.95rem;
     line-height: 1.6;
 }
 
-.node-body ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 0 0 0.5rem;
+.tsection-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
 }
 
-.node-body p {
-    margin: 0.25rem 0;
+
+/* ---------------------------------------------------------------------
+   2. Grid: cards in one row share the same height
+   --------------------------------------------------------------------- */
+
+.tcard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+    gap: clamp(14px, 2.5vmin, 24px);
 }
 
-/* Items without details: no plus, no hint, no click */
-.node--static .node-summary {
+
+/* ---------------------------------------------------------------------
+   3. Card surface, accent bar and states
+   Hover and keyboard focus use the same highlight.
+   --------------------------------------------------------------------- */
+
+.tcard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.35rem 1.35rem 1.6rem;
+    background: linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
     cursor: default;
-    pointer-events: none;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-.node--static .node-plus,
-.node--static .node-hint {
+/* Accent bar along the bottom: the same on every card */
+.tcard::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--color-accent);
+    transition: height 0.2s ease;
+}
+
+.tcard:hover,
+.tcard:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    background:
+        linear-gradient(rgb(var(--color-accent-rgb) / 0.10), rgb(var(--color-accent-rgb) / 0.10)),
+        linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Keyboard focus also gets the site's orange ring */
+.tcard:focus-visible {
+    box-shadow: var(--shadow-glow), var(--focus-ring);
+}
+
+.tcard:hover::after,
+.tcard:focus-visible::after {
+    height: 6px;
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Card head: image or initial, title and subtitle
+   --------------------------------------------------------------------- */
+
+.tcard-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.tcard-avatar {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: var(--color-surface-raised);
+    border: 2px solid var(--color-accent);
+}
+
+.tcard-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tcard-initial {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-accent);
+}
+
+.tcard-heading {
+    min-width: 0;
+}
+
+.tcard-title {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--color-text-strong);
+    overflow-wrap: anywhere;
+}
+
+.tcard-sub {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Summary and "More details" disclosure
+   --------------------------------------------------------------------- */
+
+.tcard-summary {
+    margin: 1rem 0 0;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.tcard-more {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.tcard-more summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    list-style: none;
+    cursor: pointer;
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.tcard-more summary::-webkit-details-marker {
     display: none;
+}
+
+.tcard-more summary::after {
+    content: "+";
+    font-size: 1.15rem;
+    line-height: 1;
+}
+
+.tcard-more[open] summary::after {
+    content: "−";
+}
+
+.tcard-more-close {
+    display: none;
+}
+
+.tcard-more[open] .tcard-more-open {
+    display: none;
+}
+
+.tcard-more[open] .tcard-more-close {
+    display: inline;
+}
+
+.tcard-more-body {
+    padding-top: 0.6rem;
+    color: var(--color-text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+.tcard-more-body p {
+    margin: 0 0 0.55rem;
+}
+
+.tcard-more-body p:last-child {
+    margin-bottom: 0;
+}
+
+.tcard-note {
+    color: var(--color-text);
+}
+
+
+/* ---------------------------------------------------------------------
+   6. Footer: technologies, always last in the card
+   --------------------------------------------------------------------- */
+
+.tcard-foot {
+    margin-top: auto;
+    padding-top: 1.1rem;
+}
+
+.tcard-label {
+    margin: 0 0 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.tcard-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+}
+
+.tcard-tags li {
+    background: var(--color-surface-raised);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.2rem 0.65rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    list-style: none;
+}
+
+/* Home sections: the broad ".sections ul" rule must not bring back bullets */
+.sections .tcard-tags,
+.sections ul.tcard-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. Compact card (skills): a smaller card with just the title
+   --------------------------------------------------------------------- */
+
+.tcard--compact {
+    padding: 1rem 1.1rem 1.25rem;
+}
+
+.tcard--compact .tcard-avatar {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+}
+
+.tcard--compact .tcard-title {
+    font-size: 0.98rem;
+}
+
+
+/* ---------------------------------------------------------------------
+   8. Skill groups and languages
+   --------------------------------------------------------------------- */
+
+.lang-meter {
+    margin-top: 1rem;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+}
+
+.lang-meter-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-link));
+}
+
+.tcard--lang .tcard-sub {
+    color: var(--color-accent);
+    font-weight: 600;
+}
+
+
+/* ---------------------------------------------------------------------
+   9. Phones: one column, slightly tighter, count moves below the title
+   --------------------------------------------------------------------- */
+
+@media (max-width: 767px) {
+    .tsection-head {
+        padding-top: 0.25rem;
+    }
+
+    .tsection-count {
+        position: static;
+        display: inline-block;
+        margin-top: 0.5rem;
+    }
+
+    .tcard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tcard {
+        padding: 1.1rem 1.05rem 1.3rem;
+    }
+
+    .tcard-avatar {
+        flex: 0 0 48px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .tcard-title {
+        font-size: 0.98rem;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   10. Reduced motion: no movement or transitions
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .tcard,
+    .tcard:hover,
+    .tcard:focus-visible,
+    .tcard::after {
+        transition: none;
+        transform: none;
+    }
 }

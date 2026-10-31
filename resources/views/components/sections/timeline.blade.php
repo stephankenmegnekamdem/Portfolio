@@ -1,60 +1,87 @@
-@props(['title', 'nodes' => []])
+@props(['title', 'intro' => null, 'nodes' => []])
 
-<section class="sections timeline-section" style="--n: {{ max(count($nodes), 1) }};">
-    <h2 class="my-black">{{ $title }}</h2>
+<section class="sections timeline-section" data-no-type>
 
-    @if(count($nodes))
-        <p class="timeline-hint">Click a circle to open its details</p>
-    @endif
+    <header class="tsection-head">
+        <div>
+            <h2 class="tsection-title">{{ $title }}</h2>
+            @if($intro)
+                <p class="tsection-intro">{{ $intro }}</p>
+            @endif
+        </div>
+        <span class="tsection-count">{{ count($nodes) }}</span>
+    </header>
 
-    <ol class="timeline">
+    <div class="tcard-grid">
         @foreach($nodes as $node)
             @php
-                $label = $node['title'] ?? '';
-                $items = array_values(array_filter((array) ($node['items'] ?? [])));
-                $body  = array_values(array_filter(array_map('trim', (array) ($node['descriptions'] ?? []))));
-                $expandable = !empty($items) || !empty($body);
+                $label     = $node['title'] ?? '';
+                $items     = array_values(array_filter((array) ($node['items'] ?? [])));
+                $body      = array_values(array_filter(array_map('trim', (array) ($node['descriptions'] ?? []))));
+                $tags      = array_values(array_filter((array) ($node['tags'] ?? [])));
+                $tagsLabel = $node['tags_label'] ?? 'Technologies';
+
+                // The first description is the summary. The rest sit behind "More details".
+                $summary = $body[0] ?? null;
+                $more    = array_slice($body, 1);
+                $notes   = array_slice($items, 1);
+                $hasMore = !empty($more) || !empty($notes);
+                $compact = !$summary && empty($tags) && !$hasMore;
             @endphp
 
-            <li class="timeline-node">
-                <details class="node {{ $expandable ? '' : 'node--static' }}">
-                    <summary class="node-summary">
-                        <span class="node-circle">
-                            @if(!empty($node['icon']))
-                                <img src="{{ asset($node['icon']) }}" alt="">
-                            @else
-                                <span class="node-initial">{{ mb_strtoupper(mb_substr($label, 0, 1)) }}</span>
-                            @endif
+            <article class="tcard {{ $compact ? 'tcard--compact' : '' }}" tabindex="0">
 
-                            @if($expandable)
-                                <span class="node-plus" aria-hidden="true">+</span>
-                            @endif
-                        </span>
-
-                        <span class="node-title my-black">{{ $label }}</span>
-
-                        @if($expandable)
-                            <span class="node-hint">Details</span>
+                <div class="tcard-head">
+                    <span class="tcard-avatar">
+                        @if(!empty($node['icon']))
+                            <img src="{{ asset($node['icon']) }}" alt="">
+                        @else
+                            <span class="tcard-initial">{{ mb_strtoupper(mb_substr($label, 0, 1)) }}</span>
                         @endif
-                    </summary>
+                    </span>
 
-                    @if($expandable)
-                        <div class="node-body my-grey">
-                            @if(!empty($items))
-                                <ul>
-                                    @foreach($items as $item)
-                                        <li>{{ $item }}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
+                    <div class="tcard-heading">
+                        <h3 class="tcard-title">{{ $label }}</h3>
+                        @if(!empty($items))
+                            <p class="tcard-sub">{{ $items[0] }}</p>
+                        @endif
+                    </div>
+                </div>
 
-                            @foreach($body as $line)
+                @if($summary)
+                    <p class="tcard-summary">{{ $summary }}</p>
+                @endif
+
+                @if($hasMore)
+                    <details class="tcard-more">
+                        <summary>
+                            <span class="tcard-more-open">More details</span>
+                            <span class="tcard-more-close">Hide details</span>
+                        </summary>
+                        <div class="tcard-more-body">
+                            @foreach($notes as $note)
+                                <p class="tcard-note">{{ $note }}</p>
+                            @endforeach
+                            @foreach($more as $line)
                                 <p>{{ $line }}</p>
                             @endforeach
                         </div>
-                    @endif
-                </details>
-            </li>
+                    </details>
+                @endif
+
+                @if(!empty($tags))
+                    <footer class="tcard-foot">
+                        <p class="tcard-label">{{ $tagsLabel }}</p>
+                        <ul class="tcard-tags">
+                            @foreach($tags as $tag)
+                                <li>{{ $tag }}</li>
+                            @endforeach
+                        </ul>
+                    </footer>
+                @endif
+
+            </article>
         @endforeach
-    </ol>
+    </div>
+
 </section>

@@ -1,0 +1,604 @@
+/* =====================================================================
+   DETAIL PANELS
+   About me (home page first screen) and project detail cards.
+   Colours come from base/_variables.css, so both themes work.
+   ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+   1. About me: identity on the left, panels on the right
+   --------------------------------------------------------------------- */
+
+.personal-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 1.6fr);
+    gap: clamp(16px, 3vmin, 32px);
+    align-items: stretch;
+    width: 100%;
+}
+
+.personal-layout > .identity-card {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: clamp(14px, 2.5vmin, 22px);
+    min-width: 0;
+}
+
+.about-panel--intro {
+    grid-column: 1 / -1;
+}
+
+
+/* ---------------------------------------------------------------------
+   2. Panel surface: shared by about panels and project cards
+   --------------------------------------------------------------------- */
+
+.about-panel,
+.pdetail-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.35rem 1.35rem 1.6rem;
+    background: linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+    cursor: default;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.about-panel {
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+/* Accent bar along the bottom */
+.about-panel::after,
+.pdetail-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    background: var(--color-accent);
+    transition: height 0.2s ease;
+}
+
+/* Hover and keyboard focus: the same highlight as the timeline cards */
+.about-panel:hover,
+.about-panel:focus-visible,
+.pdetail-card:hover,
+.pdetail-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    background:
+        linear-gradient(rgb(var(--color-accent-rgb) / 0.10), rgb(var(--color-accent-rgb) / 0.10)),
+        linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    box-shadow: var(--shadow-glow);
+}
+
+.about-panel:focus-visible,
+.pdetail-card:focus-visible {
+    box-shadow: var(--shadow-glow), var(--focus-ring);
+}
+
+.about-panel:hover::after,
+.about-panel:focus-visible::after,
+.pdetail-card:hover::after,
+.pdetail-card:focus-visible::after {
+    height: 6px;
+}
+
+
+/* ---------------------------------------------------------------------
+   3. About panel content
+   --------------------------------------------------------------------- */
+
+.about-panel p {
+    margin: 0 0 0.65rem;
+}
+
+.about-panel p:last-child {
+    margin-bottom: 0;
+}
+
+.about-heading {
+    margin: 0 0 0.8rem;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.about-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+}
+
+.about-list li {
+    position: relative;
+    padding-left: 1.1rem;
+}
+
+.about-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+}
+
+.about-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.about-tags li {
+    background: var(--color-surface-raised);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.about-tags li:hover {
+    border-color: var(--color-accent);
+    background: rgb(var(--color-accent-rgb) / 0.15);
+    color: var(--color-text-strong);
+}
+
+
+/* ---------------------------------------------------------------------
+   4. Project detail page: heading and link
+   --------------------------------------------------------------------- */
+
+.pdetail-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    margin-bottom: clamp(14px, 2.6vmin, 22px);
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.pdetail-head .project-screen-title {
+    margin: 0;
+    font-size: clamp(1.5rem, 3.2vmin, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.pdetail-link {
+    font-weight: 600;
+    color: var(--color-link);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 2px;
+    white-space: nowrap;
+}
+
+.pdetail-link:hover {
+    color: var(--color-link-hover);
+}
+
+
+/* ---------------------------------------------------------------------
+   5. Project detail cards
+   --------------------------------------------------------------------- */
+
+.pdetail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(14px, 2.5vmin, 22px);
+    margin-top: clamp(16px, 3vmin, 26px);
+}
+
+.pdetail-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.pdetail-text {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.97rem;
+    line-height: 1.7;
+}
+
+.pdetail-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.pdetail-list li {
+    position: relative;
+    padding-left: 1.1rem;
+}
+
+.pdetail-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+}
+
+.pdetail-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.pdetail-tags li {
+    background: var(--color-surface-raised);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+
+/* ---------------------------------------------------------------------
+   6. "Show more" disclosure on project pages
+   --------------------------------------------------------------------- */
+
+.pdetail-more {
+    margin-top: clamp(18px, 3.2vmin, 30px);
+}
+
+.pdetail-more > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.2rem;
+    list-style: none;
+    cursor: pointer;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    user-select: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pdetail-more > summary:hover {
+    border-color: var(--color-accent);
+    background: rgb(var(--color-accent-rgb) / 0.08);
+}
+
+.pdetail-more > summary::-webkit-details-marker {
+    display: none;
+}
+
+.pdetail-more > summary::after {
+    content: "+";
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.pdetail-more[open] > summary::after {
+    content: "−";
+}
+
+.pdetail-more-close {
+    display: none;
+}
+
+.pdetail-more[open] .pdetail-more-open {
+    display: none;
+}
+
+.pdetail-more[open] .pdetail-more-close {
+    display: inline;
+}
+
+
+/* ---------------------------------------------------------------------
+   7. Phones
+   --------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .personal-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .pdetail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pdetail-card,
+    .about-panel {
+        padding: 1.1rem 1.05rem 1.3rem;
+    }
+
+    .pdetail-more > summary {
+        font-size: 0.92rem;
+    }
+}
+
+
+/* ---------------------------------------------------------------------
+   8. Reduced motion: no movement or transitions
+   --------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .about-panel,
+    .about-panel:hover,
+    .about-panel:focus-visible,
+    .pdetail-card,
+    .pdetail-card:hover,
+    .pdetail-card:focus-visible {
+        transition: none;
+        transform: none;
+    }
+}
+.pdetail-label {
+    margin: 0 0 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+.pdetail-text {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.97rem;
+    line-height: 1.7;
+}
+
+.pdetail-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.55rem;
+    color: var(--color-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.pdetail-list li {
+    position: relative;
+    padding-left: 1.1rem;
+}
+
+.pdetail-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+}
+
+.pdetail-tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.pdetail-tags li {
+    background: var(--color-surface-raised);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+/* The extra details: one full-width button, then the cards */
+.pdetail-more {
+    margin-top: clamp(18px, 3.2vmin, 30px);
+}
+
+.pdetail-more > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.2rem;
+    list-style: none;
+    cursor: pointer;
+    background: var(--color-surface);
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    user-select: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.pdetail-more > summary:hover {
+    border-color: var(--color-accent);
+    background: rgb(var(--color-accent-rgb) / 0.08);
+}
+
+.pdetail-more > summary::-webkit-details-marker {
+    display: none;
+}
+
+.pdetail-more > summary::after {
+    content: "+";
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.pdetail-more[open] > summary::after {
+    content: "−";
+}
+
+.pdetail-more-close {
+    display: none;
+}
+
+.pdetail-more[open] .pdetail-more-open {
+    display: none;
+}
+
+.pdetail-more[open] .pdetail-more-close {
+    display: inline;
+}
+
+@media (max-width: 767px) {
+    .pdetail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pdetail-card,
+    .about-panel {
+        padding: 1.1rem 1.05rem 1.3rem;
+    }
+
+    .pdetail-more > summary {
+        font-size: 0.92rem;
+    }
+}
+
+/* ===== PROJECT CARD INTERACTION: hover and keyboard highlight ===== */
+
+.pdetail-card {
+    cursor: default;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.pdetail-card:hover,
+.pdetail-card:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    background:
+        linear-gradient(rgb(var(--color-accent-rgb) / 0.10), rgb(var(--color-accent-rgb) / 0.10)),
+        linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    box-shadow: var(--shadow-glow);
+}
+
+.pdetail-card:focus-visible {
+    box-shadow: var(--shadow-glow), var(--focus-ring);
+}
+
+.pdetail-card:hover::after,
+.pdetail-card:focus-visible::after {
+    height: 6px;
+}
+
+.pdetail-card::after {
+    transition: height 0.2s ease;
+}
+
+.pdetail-tags li {
+    list-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pdetail-card,
+    .pdetail-card:hover,
+    .pdetail-card:focus-visible,
+    .tcard::after {
+        transition: none;
+        transform: none;
+    }
+}
+/* ===== ABOUT PANELS: same hover and keyboard highlight as the cards ===== */
+
+.about-panel {
+    cursor: default;
+    outline: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.about-panel:hover,
+.about-panel:focus-visible {
+    transform: translateY(-4px);
+    border-color: var(--color-accent);
+    background:
+        linear-gradient(rgb(var(--color-accent-rgb) / 0.10), rgb(var(--color-accent-rgb) / 0.10)),
+        linear-gradient(160deg, var(--color-surface) 65%, var(--color-tile-start) 100%);
+    box-shadow: var(--shadow-glow);
+}
+
+.about-panel:focus-visible {
+    box-shadow: var(--shadow-glow), var(--focus-ring);
+}
+
+.about-panel::after {
+    transition: height 0.2s ease;
+}
+
+.about-panel:hover::after,
+.about-panel:focus-visible::after {
+    height: 6px;
+}
+
+/* Interest pills react to hover too */
+.about-tags li {
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.about-tags li:hover {
+    border-color: var(--color-accent);
+    background: rgb(var(--color-accent-rgb) / 0.15);
+    color: var(--color-text-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-panel,
+    .about-panel:hover,
+    .about-panel:focus-visible {
+        transition: none;
+        transform: none;
+    }
+}

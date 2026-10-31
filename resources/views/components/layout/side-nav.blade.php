@@ -6,7 +6,9 @@
         ['href' => '#projects',       'label' => 'Projects'],
         ['href' => '#work',           'label' => 'Work'],
         ['href' => '#skills',         'label' => 'Skills'],
+        ['href' => '#languages',         'label' => 'Languages'],
         ['href' => '#certifications', 'label' => 'Certifications'],
+        ['href' => '#recognitions',         'label' => 'Recognitions'],
     ],
     'fixed' => false,
 ])

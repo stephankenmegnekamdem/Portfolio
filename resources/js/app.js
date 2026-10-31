@@ -9,6 +9,7 @@ import { initTerminal } from './modules/terminal';
 import { initTypewriter } from './modules/typewriter';
 import { initTheme } from './modules/theme';
 import { initPageSnap } from './modules/page-snap';
+import { initCardNav } from './modules/card-nav';
 
 initScrollCue();
 initProgressBar();
@@ -21,3 +22,4 @@ initTerminal();
 initTypewriter();
 initTheme();
 initPageSnap();
+initCardNav();
