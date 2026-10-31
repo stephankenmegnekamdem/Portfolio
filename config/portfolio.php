@@ -106,7 +106,7 @@ return [
             'title'        => 'School Timetable Generator',
             'image'        => 'assets/images/projects/timetable-software.png',
             'description'  => 'A Java program that generates a weekly timetable for a six-class primary school, respecting teacher availability, absences, subject eligibility and daily limits. It is a working prototype that is still being improved.',
-            'url'          => null,
+            'url'          => 'https://github.com/stephankenmegnekamdem/school_time_table_scheduler',
             'screenshots'  => [],
             'technologies' => ['Java', 'Object-oriented design', 'Randomised search', 'Penalty-based scoring'],
             'why'          => 'It shows I can model a real-world problem with many constraints, design a search algorithm, and check the results with a validator.',
