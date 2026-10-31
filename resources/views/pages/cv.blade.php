@@ -20,7 +20,7 @@
                 <section class="block">
                     <h5>Contact</h5>
                     <ul class="plain">
-                        <li>Paris, 75015</li>
+                        <li>75015 Paris</li>
                         <li><a href="mailto:{{ config('portfolio.email') }}">{{ config('portfolio.email') }}</a></li>
                         <li>07 81 18 53 06</li>
                         <li>Linkedin: <a href="https://www.linkedin.com/in/stephan-kenmegne-kamdem/">@stephankenmegnekamdem</a></li>
